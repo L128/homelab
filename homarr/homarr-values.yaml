@@ -11,7 +11,7 @@ ingress:
   # -- Enable ingress
   enabled: true
   # -- Ingress class name
-  ingressClassName: "Traefik"
+  ingressClassName: "traefik"
   # -- Ingress annotations
   annotations: {}
     # kubernetes.io/ingress.class: nginx
