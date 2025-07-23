@@ -34,7 +34,7 @@ spec:
   ports:
   - port: 80        # Service暴露端口
     targetPort: 3000  # 映射到容器的端口
-  type: LoadBalancer   # 无负载均衡，直接访问Pod
+  type: ClusterIP   # 无负载均衡，直接访问Pod
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
@@ -52,3 +52,5 @@ spec:
     services:
     - name: reference-service  # 关联Service名称
       port: 80                # 关联Service端口
+  tls:
+    secretName: myapps-tls  # 引用证书 Secret（需与 cert-manager 创建的 Secret 名称一致)
