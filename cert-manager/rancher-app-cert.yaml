@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rancher-app-cert  # 证书名称（在当前命名空间唯一）
+  namespace: cattle-system  # 第一个命名空间
+spec:
+  secretName: rancher-tls  # 证书存储的Secret名称
+  commonName: rancher.homelab.me
+  dnsNames:
+    - rancher.homelab.me
+  issuerRef:
+    name: local-ca-issuer  # 引用集群级ClusterIssuer的名称
+    kind: ClusterIssuer  # 必须指定为ClusterIssuer
+    group: cert-manager.io
