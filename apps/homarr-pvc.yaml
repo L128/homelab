@@ -1,0 +1,13 @@
+# 创建 homarr-pvc.yaml 文件
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homarr-database
+  namespace: myapps
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # 足够 Homarr 使用
+  storageClassName: ""  # 使用默认存储类（如果有的话），否则留空手动绑定
