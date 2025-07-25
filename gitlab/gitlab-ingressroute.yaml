@@ -1,0 +1,72 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-web
+  namespace: gitlab
+spec:
+  entryPoints:
+    - websecure  # 对应 Traefik 配置的 HTTPS 入口点
+  routes:
+    - match: Host(`gitlab.app.homelab.me`) && PathPrefix(`/assets`)
+      kind: Rule
+      services:
+        - name: gitlab-webservice-default
+          port: 8080
+    - match: Host(`gitlab.app.homelab.me`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: gitlab-webservice-default  # GitLab Web 服务
+          port: 8080                       # Web 服务端口
+      middlewares:
+        - name: gitlab-headers             # 可选：添加必要的请求头
+  tls:
+    secretName: gitlab-tls  # 引用证书 Secret（需与 cert-manager 创建的 Secret 名称一致)
+
+---
+# GitLab 容器仓库 IngressRoute（如需启用）
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-registry
+  namespace: gitlab
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`registry.gitlab.app.homelab.me`)
+      kind: Rule
+      services:
+        - name: gitlab-registry  # Registry 服务
+          port: 5000             # Registry 端口
+  tls:
+    secretName: gitlab-tls  # 引用证书 Secret（需与 cert-manager 创建的 Secret 名称一致)
+
+# ---
+# # GitLab SSH 访问（通过 Traefik TCP 路由）
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRouteTCP
+# metadata:
+#   name: gitlab-ssh
+#   namespace: gitlab
+# spec:
+#   entryPoints:
+#     - ssh  # 需在 Traefik 中配置 ssh 入口点（通常监听 22 端口）
+#   routes:
+#     - match: HostSNI(`*`)  # TCP 无 Host 头，使用通配符匹配
+#       services:
+#         - name: gitlab-gitlab-shell  # GitLab Shell 服务（处理 SSH）
+#           port: 22                   # SSH 端口
+
+---
+# 可选：添加必要的请求头中间件
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: gitlab-headers
+  namespace: gitlab
+spec:
+  headers:
+    customRequestHeaders:
+      X-Forwarded-Proto: https
+    customResponseHeaders:
+      Strict-Transport-Security: max-age=31536000; includeSubDomains

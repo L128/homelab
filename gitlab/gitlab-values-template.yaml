@@ -48,7 +48,7 @@ global:
     labels: {}
 
   ## https://docs.gitlab.com/charts/installation/deployment#deploy-the-community-edition
-  edition: ce
+  edition: "ce"
 
   ## https://docs.gitlab.com/charts/charts/globals#gitlab-version
   gitlabVersion: "18.2.1"
