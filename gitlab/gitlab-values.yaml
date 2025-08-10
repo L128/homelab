@@ -7,8 +7,8 @@ global:
     gitlab:
       host: gitlab.app.homelab.me
     # 如果需要其他服务（如 registry、pages 等）也使用该域名前缀，可类似配置
-    registry:
-      host: registry.app.homelab.me
+    # registry:
+    #   host: registry.app.homelab.me
     pages:
       host: pages.app.homelab.me
     minio:
@@ -25,12 +25,26 @@ global:
       enabled: false             # 由 Traefik + cert-manager 管理 TLS
 
   # 其他基础配置（根据需求调整）
-  edition: ce  # 使用社区版
-  gitlabVersion: "18.2.1"  # 保持与模板一致的版本
+  # edition: ce  # 使用社区版
+  # gitlabVersion: "18.2.1"  # 保持与模板一致的版本
 
   minio:
     enabled: true  # 如需外部对象存储，设为 false 并配置 global.appConfig.object_store
 
+  registry:
+    # 配置 httpSecret 从 Secret 读取
+    httpSecret:
+      secret: gitlab-registry-httpsecret  # 对应上面创建的 Secret 名称
+      key: httpSecret                     # 对应 Secret 中的 key
+
+  smtp:
+    enabled: false  # 启用后需填写 SMTP 信息
+    # address: smtp.example.com
+    # port: 587
+    # user_name: your-email@example.com
+    # password:
+    #   secret: "smtp-password-secret"
+    #   key: password
 # 禁用内置组件（如需）
 nginx-ingress:
   enabled: false  # 禁用内置 Nginx Ingress
@@ -45,15 +59,27 @@ installCertmanager: false      # 禁用内置 cert-manager 安装
 
 gitlab:
   webservice:
-    enabled: true
-    # 如需自定义资源限制，可添加：
-    # resources:
-    #   requests:
-    #     cpu: 500m
-    #     memory: 1Gi
-    #   limits:
-    #     cpu: 1000m
-    #     memory: 2Gi
+    resources:
+      requests:
+        cpu: 300m
+        memory: "4Gi"  # 提高请求内存（至少比当前高50%）
+      limits:
+        cpu: 1000m
+        memory: "6Gi"  # 提高内存上限（避免被OOM杀死）
+    readinessProbe:
+      initialDelaySeconds: 120  # 延长至2分钟，确保服务有足够时间启动
+      timeoutSeconds: 5
+      period: 10
+    livenessProbe:
+      initialDelaySeconds: 180  # 延长存活探针初始延迟
+      timeoutSeconds: 30
+    appConfig:
+      # 新增：声明静态资源路径及访问权限
+      static_files:
+        enabled: true
+        paths:
+          - /assets  # 允许 /assets 下的所有资源公开访问
+        skip_authentication: true  # 无需登录即可访问
 
 ## 禁用不需要的内置服务（如已使用外部服务）
 postgresql:
@@ -65,19 +91,3 @@ redis:
 pages:
   enabled: false  # 根据需求启用
   # 如需启用，需额外创建对应的 IngressRoute
-
-## 邮件配置（按需配置）
-global:
-  smtp:
-    enabled: false  # 启用后需填写 SMTP 信息
-    # address: smtp.example.com
-    # port: 587
-    # user_name: your-email@example.com
-    # password:
-    #   secret: "smtp-password-secret"
-    #   key: password
-
-  # 初始管理员密码（建议通过 secret 配置）
-  # initialRootPassword:
-  #   secret: "gitlab-initial-root-password"  # 提前创建的 secret 名称
-  #   key: password
