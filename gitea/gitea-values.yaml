@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  className: ""
+  pathType: Prefix
+  annotations: {}
+  hosts:
+    - host: gitea.app.homelab.me
+      paths:
+        - path: /
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - git.example.com
