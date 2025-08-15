@@ -45,7 +45,11 @@ ingress:
 # - You need to override or simulate DNS entries without changing global DNS
 # - You are running in an air-gapped or isolated environment without external DNS
 # Example:
-hostAliases:
-  - ip: "192.168.50.211"
-    hostnames:
-      - "*.app.homelab.me"
+# hostAliases:
+#   - ip: "192.168.50.211"
+#     hostnames:
+#       - "*.app.homelab.me"
+
+rbac:
+  # -- Enable to create RBAC resources and activate Kubernetes integration
+  enabled: true
