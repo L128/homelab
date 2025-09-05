@@ -1,25 +1,29 @@
-helmfiles:
-  - environments/base.yaml
-  - environments/{{ .Environment.Name }}.yaml
-  - releases/monitoring/*.yaml
-  - releases/logging/*.yaml
-  - releases/infrastructure/*.yaml
-
-repositories:
-  - name: prometheus-community
-    url: https://prometheus-community.github.io/helm-charts
-  - name: elastic
-    url: https://helm.elastic.co
-  - name: ingress-nginx
-    url: https://kubernetes.github.io/ingress-nginx
-
+# 全局默认配置
 helmDefaults:
-  wait: true
-  timeout: 300
-  recreatePods: false
-  force: false
   atomic: true
+  verify: false
+  wait: true
+  timeout: 120
+  createNamespace: true
 
-commonLabels:
-  managed-by: helmfile
-  project: my-project
+# 环境定义（开发/生产等）
+environments:
+  default:
+    values:
+      - environments/base/common.yaml  # 所有环境共享基础配置
+  dev:
+    values:
+      - environments/base/common.yaml
+      - environments/dev/common.yaml   # 开发环境通用配置
+      - environments/dev/tls.yaml      # 开发环境TLS配置
+  prod:
+    values:
+      - environments/base/common.yaml
+      - environments/prod/common.yaml
+      - environments/prod/tls.yaml
+
+# 引入所有应用的release配置（支持通配符）
+helmfiles:
+  # - path: releases/test.yaml
+  - path: releases/applications/homarr.gotmpl
+  # - path: releases/**/*.yaml

@@ -1,0 +1,30 @@
+{{- if .Values.ingressRoute.enabled }}
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}-ingressroute
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    {{- toYaml .Values.ingressRoute.annotations | nindent 4 }}
+spec:
+  entryPoints:
+    - {{ .Values.ingressRoute.entryPoint | default "websecure" }}
+  routes:
+    - match: Host(`{{ .Values.ingressRoute.host }}`){{ if .Values.ingressRoute.path }} && PathPrefix(`{{ .Values.ingressRoute.path }}`){{ end }}
+      kind: Rule
+      services:
+        - name: {{ .Values.ingressRoute.service.name | default (printf "%s-main" .Release.Name) }}
+          port: {{ .Values.ingressRoute.service.port }}
+      {{- if .Values.ingressRoute.middlewares }}
+      middlewares:
+        {{- toYaml .Values.ingressRoute.middlewares | nindent 6 }}
+      {{- end }}
+  {{- if .Values.ingressRoute.tls.enabled }}
+  tls:
+    secretName: {{ .Values.ingressRoute.tls.secretName }}
+    {{- if .Values.ingressRoute.tls.domains }}
+    domains:
+      {{- toYaml .Values.ingressRoute.tls.domains | nindent 6 }}
+    {{- end }}
+  {{- end }}
+{{- end }}

@@ -1,7 +1,3 @@
-env:
-  # -- Your local time zone
-  TZ: "Asia/Shanghai"
-  
 database:
 #   # -- Enable external database
 #   externalDatabaseEnabled: true
@@ -9,9 +5,9 @@ database:
 
 persistence:
   homarrDatabase:
-    enabled: true
-    storageClassName: "longhorn"
-    size: "1Gi"
+    enabled: true  # 禁用自动创建PVC（关键）
+    storageClassName: "longhorn"  # 留空（使用现有PVC的storageClass）
+    size: "1G"  # 留空（使用现有PVC的容量）
 
   # Ingress configuration
 ingress:
@@ -38,18 +34,7 @@ ingress:
      hosts:
        - homarr.app.homelab.me
 
-# -- Add static entries to /etc/hosts in the Pod.
-# This is useful in the following cases:
-# - You are running in a dual-stack cluster (IPv4 + IPv6) and want to force usage of IPv4 for specific hostnames
-# - Your application is having DNS resolution issues or IPv6 preference issues
-# - You need to override or simulate DNS entries without changing global DNS
-# - You are running in an air-gapped or isolated environment without external DNS
-# Example:
-# hostAliases:
-#   - ip: "192.168.50.211"
-#     hostnames:
-#       - "*.app.homelab.me"
-
 rbac:
   # -- Enable to create RBAC resources and activate Kubernetes integration
   enabled: true
+

@@ -1,0 +1,5 @@
+releases:
+  - name: test
+    namespace: test
+    chart: bitnami/nginx
+    version: 15.0.0

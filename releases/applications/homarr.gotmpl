@@ -1,0 +1,21 @@
+environments:
+  default:
+    values:
+      - homarrNamespace: myapps
+  dev:
+    values:
+      - homarrNamespace: helmfile-dev
+  prod:
+    values:
+      - homarrNamespace: myapps
+---
+releases:
+  - name: homarr
+    chart: oci://ghcr.io/homarr-labs/charts/homarr
+    version: 5.9.0
+    namespace: {{ .Values.homarrNamespace }}
+    labels:
+      app: homarr
+    values:
+      - ../../values/applications/homarr/base.yaml
+      - ../../values/applications/homarr/{{ .Environment.Name }}/main.yaml

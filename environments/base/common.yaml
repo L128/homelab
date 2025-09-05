@@ -1,0 +1,7 @@
+# 全局应用开关
+homarr:
+  enabled: false
+
+# 共享存储类配置
+storageClass:
+  default: longhorn  # 基础存储类（Longhorn）
