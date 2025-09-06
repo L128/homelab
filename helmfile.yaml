@@ -16,6 +16,7 @@ environments:
       - environments/base/common.yaml
       - environments/dev/common.yaml   # 开发环境通用配置
       - environments/dev/tls.yaml      # 开发环境TLS配置
+
   prod:
     values:
       - environments/base/common.yaml
@@ -25,5 +26,6 @@ environments:
 # 引入所有应用的release配置（支持通配符）
 helmfiles:
   # - path: releases/test.yaml
-  - path: releases/applications/homarr.gotmpl
+  - path: releases/applications/*.gotmpl
+  - path: releases/infrastructure/*.gotmpl
   # - path: releases/**/*.yaml

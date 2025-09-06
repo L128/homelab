@@ -1,0 +1,24 @@
+repositories:
+  - name: portainer
+    url: https://portainer.github.io/k8s/  # Portainer 官方 Helm 仓库
+environments:
+  default:
+    values:
+      - portainerNamespace: portainer
+  dev:
+    values:
+      - portainerNamespace: helmfile-dev
+  prod:
+    values:
+      - portainerNamespace: portainer
+---
+releases:
+  - name: portainer
+    chart: portainer/portainer
+    version: 2.33.1
+    namespace: {{ .Values.portainerNamespace }}
+    labels:
+      app: portainer
+    values:
+      - ../../values/applications/portainer/{{ .Environment.Name }}/main.yaml
+      - ../../values/applications/portainer/{{ .Environment.Name }}/ingress.yaml

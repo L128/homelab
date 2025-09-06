@@ -1,6 +1,7 @@
-# 开发环境开启Homarr
-homarr:
+# 开发环境开启
+traefik:
   enabled: true
+
 
 # 开发环境存储类（如需覆盖基础配置）
 storageClass:

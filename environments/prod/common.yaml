@@ -1,5 +1,5 @@
 # 全局应用开关
-homarr:
+traefik:
   enabled: true
 
 # 共享存储类配置
