@@ -1,21 +1,6 @@
 repositories:
   - name: traefik
     url: https://traefik.github.io/charts  # 官方Traefik Helm仓库
-
-environments:
-  default:
-    values:
-      - ../../environments/base/common.yaml  # 所有环境共享基础配置
-  dev:
-    values:
-      - ../../environments/base/common.yaml
-      - ../../environments/dev/common.yaml   # 开发环境通用配置
-      - ../../environments/dev/tls.yaml      # 开发环境TLS配置
-  prod:
-    values:
-      - ../../environments/base/common.yaml
-      - ../../environments/prod/common.yaml
-      - ../../environments/prod/tls.yaml
 ---
 releases:
   - name: traefik

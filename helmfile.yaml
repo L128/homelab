@@ -25,7 +25,5 @@ environments:
 
 # 引入所有应用的release配置（支持通配符）
 helmfiles:
-  # - path: releases/test.yaml
   - path: releases/applications/*.gotmpl
   - path: releases/infrastructure/*.gotmpl
-  # - path: releases/**/*.yaml

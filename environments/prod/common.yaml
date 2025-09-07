@@ -2,6 +2,9 @@
 traefik:
   enabled: true
 
+portainer:
+  enabled: true
+
 # 共享存储类配置
 storageClass:
   default: longhorn  # 基础存储类（Longhorn）

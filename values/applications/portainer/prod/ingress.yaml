@@ -1,8 +1,0 @@
-# 引用你的 Traefik IngressRoute 模板
-ingressRoute:
-  enabled: true
-ingress:
-  name: portainer-ingressroute
-  entryPoint: websecure  # 对应 Traefik 入口点
-  host: portainer.app.homelab.me  # 你的域名
-  tlsSecret: portainer-cert  # 引用你的 TLS 密钥
