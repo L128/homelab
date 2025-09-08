@@ -1,0 +1,18 @@
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+---
+releases:
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    version: 1.18.2
+    namespace: cert-manager
+    labels:
+      app: cert-manager  # 统一标签与Homarr保持一致
+    set:
+      - name: installCRDs
+        value: true
+    values:
+      - extraArgs:
+        - --dns01-recursive-nameservers-only
+        - --dns01-recursive-nameservers=192.168.50.110:53

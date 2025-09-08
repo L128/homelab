@@ -1,2 +1,2 @@
 # k3s_configs
-value files for rancher
+helmfiles for a homelab running k3s in Vsphere

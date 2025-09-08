@@ -1,0 +1,16 @@
+# 禁用持久卷
+persistence:
+  homarrDatabase:
+    enabled: false
+  homarrTrustedCerts:
+    enabled: false
+
+# 禁用认证（无需登录）
+env:
+  AUTH_PROVIDERS: ""   # 禁用所有认证方式
+
+# 禁用数据库持久化
+database:
+  externalDatabaseEnabled: false
+mysql:
+  internal: false

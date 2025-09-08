@@ -1,0 +1,3 @@
+# 环境变量（跨环境共享）
+env:
+  TZ: "Asia/Shanghai"

@@ -1,0 +1,4 @@
+# 通用TLS配置
+tls:
+  issuer: dev-ca-issuer  # 开发环境ClusterIssuer
+  secretPrefix: "dev-"   # 证书Secret前缀
