@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./applications/nginx-test
+  path: ./clusters/k3s-homelab/applications/nginx-test
   prune: true
   sourceRef:
     kind: GitRepository
