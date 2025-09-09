@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "enabledManagers": ["argocd"], // 启用 ArgoCD 管理器（关键）
+  "argocd": {
+    "fileMatch": ["**/*.yaml"] // 精确匹配目标文件
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["argocd"], // 仅对 ArgoCD 管理器生效
+      "schedule": ["every weekday"], // 每周一至周五检查更新
+      "automerge": false, // 禁用自动合并（建议先手动验证）
+      "labels": ["dependencies", "argocd"] // 为 PR 添加标签
+    }
+  ]
+}

@@ -17,5 +17,6 @@ releases:
     labels:
       app: homarr
     values:
-      - ../../values/applications/homarr/base.yaml
-      - ../../values/applications/homarr/{{ .Environment.Name }}/main.yaml
+      # - ../../values/applications/homarr/base.yaml
+      # - ../../values/applications/homarr/{{ .Environment.Name }}/main.yaml
+      - ../../values/applications/homarr/homarr-values.yaml
