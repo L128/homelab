@@ -9,6 +9,7 @@ resources:
 
 configMapGenerator:
   - name: homarr-values
+    namespace: myapps
     files:
       - values.yaml=../../../../values/applications/homarr/homarr-values.yaml
     options:
