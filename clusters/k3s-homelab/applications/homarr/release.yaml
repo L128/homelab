@@ -16,5 +16,5 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: homarr-values
-    namespace: flux-system
+    namespace: myapps
     valuesKey: values.yaml
