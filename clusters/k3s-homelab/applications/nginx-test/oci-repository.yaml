@@ -1,0 +1,12 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: nginx-chart
+  namespace: myapps
+spec:
+  interval: 1h
+  url: oci://registry-1.docker.io/bitnamicharts/nginx
+  ref:
+    tag: 18.2.11
+  provider: generic

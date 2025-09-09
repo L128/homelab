@@ -1,0 +1,28 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: nginx-test
+  namespace: myapps
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nginx
+      version: "18.2.11"
+      sourceRef:
+        kind: OCIRepository
+        name: nginx-chart
+        namespace: myapps
+  values:
+    # 默认值配置，可以根据需要自定义
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    resources:
+      limits:
+        cpu: 200m
+        memory: 256Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
