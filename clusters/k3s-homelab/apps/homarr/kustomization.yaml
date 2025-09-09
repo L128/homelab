@@ -22,4 +22,4 @@ configMapGenerator:
 dependencies:
   - name: homarr-chart
     namespace: flux-system
-    path: ../../../sources  # 指向 HelmRepository 所在目录
+    path: ../../../sources/homarr-chart.yaml  # 直接指向HelmRepository文件
