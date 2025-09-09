@@ -1,4 +1,4 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
+apiVersion: kustomize.config.k8s.io/v1
 kind: Kustomization
 namespace: myapps
 resources:
@@ -7,13 +7,17 @@ resources:
 configMapGenerator:
 - name: homarr-values
   namespace: myapps
+  behavior: replace
   files:
   - homarr-values.yaml
-vars:
-- name: NAMESPACE
-  objref:
+replacements:
+- source:
     kind: Namespace
     name: myapps
-    apiVersion: v1
-  fieldref:
-    fieldpath: metadata.name
+    fieldPath: metadata.name
+  targets:
+  - select:
+      kind: ConfigMap
+      name: homarr-values
+    fieldPaths:
+    - metadata.namespace
