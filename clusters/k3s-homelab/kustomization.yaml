@@ -1,0 +1,7 @@
+# clusters/k3s-homelab/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - flux-system
+  - sources  # 包含 HelmRepository
+  - apps/homarr  # 添加 homarr 应用配置

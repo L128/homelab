@@ -1,0 +1,10 @@
+# clusters/k3s-homelab/sources/homarr-chart.yaml
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: homarr
+  namespace: flux-system  # Flux 资源默认放在 flux-system 命名空间
+spec:
+  interval: 1h  # 每小时同步一次仓库索引
+  url: oci://ghcr.io/homarr-labs/charts/homarr  # Homarr 官方 Helm 仓库
+  timeout: 30s

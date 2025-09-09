@@ -1,0 +1,25 @@
+# clusters/k3s-homelab/apps/homarr/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: homarr
+  namespace: myapps
+
+# 资源列表：包含 HelmRelease 和从 values 文件生成的 ConfigMap
+resources:
+  - helmrelease.yaml
+
+# 从你的 values 文件生成 ConfigMap（关键步骤）
+configMapGenerator:
+  - name: homarr-values  # 与 HelmRelease 中引用的 ConfigMap 名称一致
+    files:
+      - values.yaml=../../../../values/applications/homarr/homarr-values.yaml  # 相对路径指向你的 values 文件
+    options:
+      labels:
+        app.kubernetes.io/part-of: homarr
+
+# 依赖：确保先同步 Helm 仓库源，再部署应用
+dependencies:
+  - name: homarr-chart
+    namespace: flux-system
+    path: ../../../sources  # 指向 HelmRepository 所在目录
