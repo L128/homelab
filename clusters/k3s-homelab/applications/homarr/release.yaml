@@ -16,4 +16,5 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: homarr-values
+    namespace: myapps
     valuesKey: values.yaml
