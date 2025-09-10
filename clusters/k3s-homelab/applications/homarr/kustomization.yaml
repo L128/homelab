@@ -15,3 +15,4 @@ spec:
   resources:
     - HelmRepository.yaml
     - HelmRelease.yaml
+    - HelmRelease.yaml
