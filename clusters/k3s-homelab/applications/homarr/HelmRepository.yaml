@@ -9,4 +9,3 @@ spec:
   url: oci://ghcr.io/homarr-labs/charts/homarr
   secretRef:
     name: ghcr-auth
-    namespace: flux-system
