@@ -7,3 +7,6 @@ spec:
   type: "oci"
   interval: 1h
   url: oci://ghcr.io/homarr-labs/charts/homarr
+  secretRef:
+    name: ghcr-auth
+    namespace: flux-system
