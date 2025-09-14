@@ -29,7 +29,6 @@ spec:
     - paths: ["/spec/replicas"]
       target:
         kind: Deployment
-  # valuesFrom:
-  #   - kind: ConfigMap
-  #     name: homarr-values  # 关联上面生成的 ConfigMap 名称
-  #     valuesKey: values.yaml  # Git 仓库中 values 文件的相对路径
+    valuesFrom:
+    - kind: ConfigMap  # 从 ConfigMap 读取配置
+      name: homarr-values # ConfigMap 基础名称（Kustomize 会自动加哈希后缀）

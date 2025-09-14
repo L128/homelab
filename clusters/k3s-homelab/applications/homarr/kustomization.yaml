@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: myapps  # 所有资源的目标命名空间（需提前创建，或在 resources 中包含 namespace.yaml）
+resources:
+  # 列出依赖的资源文件（需确保这些文件已存在）
+  - HelmRepository.yaml  # 之前定义的 HelmRepository 资源（如指向 podinfo 的 Helm 仓库）
+  - HelmRelease.yaml     # 步骤 2 创建的 HelmRelease 资源
+configMapGenerator:
+  # 生成 ConfigMap：基于本地 homarr-values.yaml 文件
+  - name: podinfo-values  # ConfigMap 基础名称（与 HelmRelease 中 valuesFrom.name 一致）
+    files:
+      - values.yaml=homarr-values.yaml  # 键：ConfigMap 中的文件名；值：本地配置文件路径
+configurations:
+  - KustomizeConfig.yaml  # 关联步骤 1 的 Kustomize 配置，确保替换 HelmRelease 中的 ConfigMap 名称
