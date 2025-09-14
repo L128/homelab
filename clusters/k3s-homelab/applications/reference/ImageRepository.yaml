@@ -3,7 +3,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
   name: reference
-  namespace: flux-system
+  namespace: myapps
 spec:
   image: wcjiang/reference
   interval: 1h0m0s
