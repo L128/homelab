@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitlab
+  namespace: gitlab
+spec:
+  interval: 1h
+  timeout: 15m
+  chart:
+    spec:
+      chart: gitlab
+      version: 9.x.x
+      sourceRef:
+        kind: HelmRepository
+        name: gitlab-chart
+      interval: 5m
+  releaseName: gitlab
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+    - paths: ["/spec/replicas"]
+      target:
+        kind: Deployment
+  valuesFrom:
+  - kind: ConfigMap
+    name: gitlab-values

@@ -1,0 +1,31 @@
+## 基础配置
+global:
+  hosts:
+    # 全局域名设置为 homelab.me
+    domain: git.homelab.me
+  
+  ## Configure GitLab to use local CA issuer for all certificates
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: local-ca-issuer
+  
+  ## https://docs.gitlab.com/charts/charts/globals#custom-certificate-authorities
+  # Add our local CA so GitLab components trust it
+  certificates:
+    customCAs:
+      - secret: gitlab-local-ca
+        keys:
+          - ca.crt
+
+## Settings for the Let's Encrypt ACME Issuer - DISABLED
+# We use local CA instead of Let's Encrypt
+certmanager-issuer:
+  install: false  # Disable the ACME issuer installation
+  email: dummy@example.com  # Required for template validation even when disabled
+## 组件配置（按需启用/调整）
+installCertmanager: false      # 禁用内置 cert-manager 安装
+
+## GitLab Runner configuration
+# Configure the runner to trust our local CA
+gitlab-runner:
+  certsSecretName: gitlab-local-ca
