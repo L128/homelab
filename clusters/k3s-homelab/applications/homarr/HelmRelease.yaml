@@ -29,6 +29,6 @@ spec:
     - paths: ["/spec/replicas"]
       target:
         kind: Deployment
-    valuesFrom:
-    - kind: ConfigMap  # 从 ConfigMap 读取配置
-      name: homarr-values # ConfigMap 基础名称（Kustomize 会自动加哈希后缀）
+  valuesFrom:
+  - kind: ConfigMap  # 从 ConfigMap 读取配置
+    name: homarr-values # ConfigMap 基础名称（Kustomize 会自动加哈希后缀）
