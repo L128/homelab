@@ -6,6 +6,6 @@ metadata:
 spec:
   type: "oci"
   interval: 1h
-  url: oci://ghcr.io/homarr-labs/charts/homarr
+  url: oci://ghcr.io/homarr-labs/charts
   secretRef:
     name: ghcr-auth
