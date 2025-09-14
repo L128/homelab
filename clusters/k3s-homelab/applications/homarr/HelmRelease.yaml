@@ -4,12 +4,12 @@ metadata:
   name: homarr
   namespace: myapps
 spec:
-  interval: 1m
+  interval: 1h
   timeout: 5m
   chart:
     spec:
       chart: homarr
-      version: 5.9.1
+      version: 5.x.x
       sourceRef:
         kind: HelmRepository
         name: homarr-chart
