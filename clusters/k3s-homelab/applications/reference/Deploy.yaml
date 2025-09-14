@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reference-deployment
+  namespace: myapps
+  labels:
+    app: reference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reference
+  template:
+    metadata:
+      labels:
+        app: reference
+    spec:
+      containers:
+      - name: reference-container
+        image: wcjiang/reference
+        ports:
+        - containerPort: 3000  # 容器暴露端口（需与镜像实际端口一致，该镜像默认使用80）
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

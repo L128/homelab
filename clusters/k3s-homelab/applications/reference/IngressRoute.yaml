@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: reference-ingressroute
+  namespace: myapps
+  labels:
+    app: reference
+spec:
+  entryPoints:
+    - websecure  # Traefik入口点（默认HTTP入口，若需HTTPS可改为websecure并配置TLS）
+  routes:
+  - match: Host(`reference.app.homelab.me`) && PathPrefix(`/`)  # 替换为你的域名
+    kind: Rule
+    services:
+    - name: reference-service  # 关联Service名称
+      port: 80                # 关联Service端口
+  tls:
+    secretName: myapps-tls  # 引用证书 Secret（需与 cert-manager 创建的 Secret 名称一致)
