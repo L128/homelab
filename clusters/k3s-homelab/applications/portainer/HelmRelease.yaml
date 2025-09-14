@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: portainer
+  namespace: portainer
+spec:
+  interval: 1h
+  timeout: 5m
+  chart:
+    spec:
+      chart: portainer
+      version: x.x.x
+      sourceRef:
+        kind: HelmRepository
+        name: portainer-chart
+      interval: 5m
+  releaseName: portainer
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+    - paths: ["/spec/replicas"]
+      target:
+        kind: Deployment
+  valuesFrom:
+  - kind: ConfigMap
+    name: portainer-values
