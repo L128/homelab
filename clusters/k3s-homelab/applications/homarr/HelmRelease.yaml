@@ -4,7 +4,7 @@ metadata:
   name: homarr
   namespace: myapps
 spec:
-  interval: 10m
+  interval: 1m
   timeout: 5m
   chart:
     spec:
@@ -29,10 +29,7 @@ spec:
     - paths: ["/spec/replicas"]
       target:
         kind: Deployment
-  values:
-    replicaCount: 1
-    service:
-      type: ClusterIP
-      port: 7575
-    ingress:
-      enabled: false
+  valuesFrom:
+    - kind: GitRepository
+      name: my-values-repo  # 关联上面定义的 GitRepository
+      valuesKey: values/applications/homarr/homarr-values.yaml  # Git 仓库中 values 文件的相对路径
