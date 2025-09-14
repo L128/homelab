@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: homarr
-      version: 5.x.x
+      version: x.x.x
       sourceRef:
         kind: HelmRepository
         name: homarr-chart
