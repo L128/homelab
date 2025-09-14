@@ -9,6 +9,6 @@ configMapGenerator:
   # 生成 ConfigMap：基于本地 homarr-values.yaml 文件
   - name: homarr-values  # ConfigMap 基础名称（与 HelmRelease 中 valuesFrom.name 一致）
     files:
-      - values.yaml=homarr-values.yaml  # 键：ConfigMap 中的文件名；值：本地配置文件路径
+      - values.yaml=Values.yaml  # 键：ConfigMap 中的文件名；值：本地配置文件路径
 configurations:
   - KustomizeConfig.yaml  # 关联步骤 1 的 Kustomize 配置，确保替换 HelmRelease 中的 ConfigMap 名称
