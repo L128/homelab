@@ -7,7 +7,7 @@ resources:
   - HelmRelease.yaml     # 步骤 2 创建的 HelmRelease 资源
 configMapGenerator:
   # 生成 ConfigMap：基于本地 homarr-values.yaml 文件
-  - name: podinfo-values  # ConfigMap 基础名称（与 HelmRelease 中 valuesFrom.name 一致）
+  - name: homarr-values  # ConfigMap 基础名称（与 HelmRelease 中 valuesFrom.name 一致）
     files:
       - values.yaml=homarr-values.yaml  # 键：ConfigMap 中的文件名；值：本地配置文件路径
 configurations:
