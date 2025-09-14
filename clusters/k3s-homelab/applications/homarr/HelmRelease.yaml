@@ -30,6 +30,6 @@ spec:
       target:
         kind: Deployment
   valuesFrom:
-    - kind: GitRepository
-      name: my-values-repo  # 关联上面定义的 GitRepository
-      valuesKey: values/applications/homarr/homarr-values.yaml  # Git 仓库中 values 文件的相对路径
+    - kind: ConfigMap
+      name: homarr-values  # 关联上面生成的 ConfigMap 名称
+      valuesKey: values.yaml  # Git 仓库中 values 文件的相对路径

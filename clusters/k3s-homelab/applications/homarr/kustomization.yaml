@@ -2,17 +2,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: myapps
-
-# 引用存储 values 文件的 Git 仓库（需提前定义 GitRepository 资源）
-resources:
-  - HelmRelease.yaml  # 你的 HelmRelease 清单
-  - ../../GitRepository.yaml      # 存储 values 文件的 GitRepository
-
-# 生成 ConfigMap：将 Git 仓库中的 values 文件转为 ConfigMap
 configMapGenerator:
   - name: homarr-values  # ConfigMap 名称
     files:
-      - values.yaml=values/applications/homarr/homarr-values.yaml  # 格式：[ConfigMap中的key]=[Git仓库中的文件路径]
+      - values.yaml=homarr-values.yaml
     options:
       labels:
         app: homarr
