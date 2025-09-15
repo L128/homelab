@@ -1,0 +1,6 @@
+namespace: cert-manager
+crds:
+  enabled: true
+extraArgs:
+  - --dns01-recursive-nameservers-only
+  - --dns01-recursive-nameservers=192.168.50.110:53

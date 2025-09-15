@@ -1,0 +1,28 @@
+# 生产环境高可用配置
+deployment:
+  replicas: 2  # 生产环境双副本
+
+# 生产环境入口点限制
+ports:
+  traefik:
+    enabled: true
+
+dashboard:
+  enabled: true 
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    entryPoints:
+      - web
+      - websecure
+    matchRule: Host(`traefik.app.homelab.me`) && PathPrefix(`/`)
+    tls:  # 为dashboard启用TLS
+      secretName: traefik-tls  # 引用证书Secret
+
+# 生产环境TLS配置
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        secretName: traefik-tls  # 生产环境证书（无dev前缀）

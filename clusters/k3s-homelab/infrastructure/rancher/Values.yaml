@@ -1,0 +1,11 @@
+hostname: rancher.homelab.me
+ingress:
+  enabled: false  # 禁用默认 Ingress，使用 IngressRoute
+tls:
+  secretName: rancher-tls
+bootstrapPassword: admin  # 初始管理员密码
+# 添加其他 Rancher 配置
+replicas: 1
+auditLog:
+  enabled: true
+  level: 1

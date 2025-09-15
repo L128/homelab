@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  interval: 24h
+  timeout: 10m
+  chart:
+    spec:
+      chart: rancher
+      version: x.x.x
+      sourceRef:
+        kind: HelmRepository
+        name: rancher-stable
+      interval: 5m
+  releaseName: rancher
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+    ignore:
+    - paths: ["/spec/replicas"]
+      target:
+        kind: Deployment
+  valuesFrom:
+  - kind: ConfigMap
+    name: rancher-values
