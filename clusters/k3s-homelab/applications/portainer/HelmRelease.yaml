@@ -4,8 +4,8 @@ metadata:
   name: portainer
   namespace: portainer
 spec:
-  interval: 1h
-  timeout: 5m
+  interval: 24h
+  timeout: 1h
   chart:
     spec:
       chart: portainer

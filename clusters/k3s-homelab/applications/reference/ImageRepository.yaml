@@ -6,6 +6,6 @@ metadata:
   namespace: myapps
 spec:
   image: wcjiang/reference
-  interval: 1h0m0s
+  interval: 24h0m0s
   secretRef:
     name: flux-image-secret
