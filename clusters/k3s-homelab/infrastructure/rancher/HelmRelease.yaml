@@ -5,7 +5,7 @@ metadata:
   namespace: cattle-system
 spec:
   interval: 24h
-  timeout: 10m
+  timeout: 45m
   chart:
     spec:
       chart: rancher

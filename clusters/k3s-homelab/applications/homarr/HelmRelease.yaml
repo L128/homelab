@@ -5,7 +5,7 @@ metadata:
   namespace: myapps
 spec:
   interval: 8h
-  timeout: 15m
+  timeout: 45m
   chart:
     spec:
       chart: homarr
