@@ -1,8 +1,8 @@
 hostname: rancher.homelab.me
 ingress:
   enabled: false  # 禁用默认 Ingress，使用 IngressRoute
-tls:
-  secretName: rancher-tls
+tls: "ingress"  # 改为字符串类型
+tlsSecretName: rancher-tls  # 单独指定证书Secret（根据图表文档调整字段名）
 bootstrapPassword: admin  # 初始管理员密码
 # 添加其他 Rancher 配置
 replicas: 1
