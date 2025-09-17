@@ -2,3 +2,5 @@
 repomix-output.xml
 dev/
 VolumeRestore/
+values/
+standalone-configs/
