@@ -1,14 +1,17 @@
+crd:
+  install: true  # 允许 Helm 安装/升级 CRD
+  upgrade: true
+  
 # 统一配置所有组件的PVC，使用longhorn存储类
 alertmanager:
   alertmanagerSpec:
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: "longhorn"  # 使用longhorn存储类
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 50Gi  # Alertmanager存储容量
+    volumeClaimTemplate:
+      spec:
+        storageClassName: "longhorn"  # 使用longhorn存储类
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 50Gi  # Alertmanager存储容量
     # PVC保留策略（可选，K8s 1.27+支持）
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
