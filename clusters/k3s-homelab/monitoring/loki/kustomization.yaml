@@ -4,7 +4,7 @@ namespace: monitoring
 resources:
   - HelmRepository.yaml
   - HelmRelease.yaml
-  - loki-ingressroute.yaml
+  - IngressRoute.yaml
 configMapGenerator:
   - name: loki-values
     files:
