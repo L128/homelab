@@ -9,6 +9,23 @@ loki:
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
+  
+  # 存储配置 - SimpleScalable 模式需要对象存储
+  storage:
+    # 定义对象存储类型
+    type: s3
+    # 配置存储后端（示例为 MinIO）
+    s3:
+      endpoint: "minio.default.svc.cluster.local:9000"  # 存储端点
+      region: "us-east-1"
+      accessKeyId: "${MINIO_ACCESS_KEY}"  # 使用 secret 存储凭证
+      secretAccessKey: "${MINIO_SECRET_KEY}"
+      insecure: true  # 对于没有 TLS 的 MinIO
+    # 必需的存储桶名称（解决错误的关键）
+    bucketNames:
+      chunks: "loki-chunks"  # 用于块存储的桶
+      ruler: "loki-ruler"    # 用于 ruler 的桶
+      admin: "loki-admin"    # 用于管理操作的桶
 
 # 资源请求和限制配置
 resources:
