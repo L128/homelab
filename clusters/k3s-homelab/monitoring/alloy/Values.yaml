@@ -1,0 +1,72 @@
+# Alloy 自定义配置（仅包含与默认配置不同的部分）
+
+# Alloy 基本设置
+alloy:
+  # 禁用 Grafana 匿名使用统计
+  enableReporting: false
+  # 挂载主机目录用于日志收集
+  mounts:
+    # 挂载 /var/log 目录收集系统日志
+    varlog: true
+    # 挂载 docker 容器日志目录
+    dockercontainers: true
+  # 资源请求和限制
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+
+# 控制器配置
+controller:
+  # 终止宽限期（秒）
+  terminationGracePeriodSeconds: 60
+  # 容忍度配置，允许在所有节点上运行
+  tolerations:
+    - operator: Exists
+  # 亲和性配置
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - alloy
+            topologyKey: kubernetes.io/hostname
+  
+  # 自动伸缩配置
+  autoscaling:
+    horizontal:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
+
+# 配置重载器资源限制
+configReloader:
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "50Mi"
+
+# 网络策略配置
+networkPolicy:
+  enabled: true
+  ingress:
+    # 允许从监控命名空间访问
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+
+# 服务监控配置
+serviceMonitor:
+  enabled: true
+  interval: "30s"

@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: loki-ingress-tls
+  namespace: monitoring
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`loki.app.homelab.me`)
+      kind: Rule
+      services:
+        - name: loki
+          port: 3100
+  tls:
+    secretName: monitoring-tls  # 使用与其他监控组件相同的TLS证书

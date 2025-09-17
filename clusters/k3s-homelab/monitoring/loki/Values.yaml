@@ -1,0 +1,34 @@
+# Loki 自定义配置（补丁格式）
+
+# 持久化存储配置（默认值：false）
+loki:
+  persistence:
+    enabled: true
+    storageClassName: "longhorn"
+    size: 50Gi
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+
+# 资源请求和限制配置
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+
+# 亲和性配置（默认值：空）
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - loki
+        topologyKey: kubernetes.io/hostname

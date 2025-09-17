@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alloy-ingress-tls
+  namespace: monitoring
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`alloy.app.homelab.me`)
+      kind: Rule
+      services:
+        - name: alloy
+          port: 12345  # Grafana Alloy默认HTTP服务端口
+  tls:
+    secretName: monitoring-tls  # 使用与其他监控组件相同的TLS证书
