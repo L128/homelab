@@ -2,6 +2,19 @@
 
 # 持久化存储配置（默认值：false）
 loki:
+  # 核心配置 - 添加缺失的 schema_config
+  config:
+    # 存储架构配置（解决 Helm 安装失败的关键）
+    schemaConfig:
+      configs:
+        - from: "2024-04-01"  # 使用近期日期作为起始点
+          object_store: s3  # 与下方 storage.type 保持一致
+          store: tsdb  # 当前唯一推荐的值
+          schema: v13  # 最新的 schema 版本
+          index:
+            prefix: index_  # 索引前缀
+            period: 24h  # 索引周期，必须为 24h
+  
   persistence:
     enabled: true
     storageClassName: "longhorn"
