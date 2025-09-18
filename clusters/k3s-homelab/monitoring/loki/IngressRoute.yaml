@@ -3,10 +3,12 @@ kind: IngressRoute
 metadata:
   name: loki-ingress-tls
   namespace: monitoring
+  labels:
+    app: loki
 spec:
   entryPoints:
     - websecure
-    # - web
+    - web
   routes:
   - match: Host(`loki.app.homelab.me`) && PathPrefix(`/`)
     kind: Rule
