@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-app-cert  # 证书名称（在当前命名空间唯一）
+  namespace: traefik  # 第一个命名空间
+spec:
+  secretName: traefik-tls  # 证书存储的Secret名称
+  commonName: traefik.app.homelab.me
+  dnsNames:
+    - traefik.app.homelab.me
+  issuerRef:
+    name: local-ca-issuer  # 引用集群级ClusterIssuer的名称
+    kind: ClusterIssuer  # 必须指定为ClusterIssuer
+    group: cert-manager.io

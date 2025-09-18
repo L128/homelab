@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: myapps-cert
+  namespace: myapps
+spec:
+  secretName: myapps-tls
+  commonName: app.homelab.me
+  dnsNames:
+    - homelab.me               # 主域名
+    - "*.homelab.me"           # 匹配所有一级子域名（如 a.example.local, b.example.local）
+    - "*.app.homelab.me"       # 匹配 api 子域下的所有子域名（如 v1.api.example.local）
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io

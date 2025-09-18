@@ -1,0 +1,62 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-cert
+  namespace: gitlab
+spec:
+  secretName: gitlab-local-tls
+  commonName: gitlab.git.homelab.me
+  dnsNames:
+    - gitlab.git.homelab.me      # GitLab main domain
+    - minio.git.homelab.me       # MinIO for object storage
+    - registry.git.homelab.me    # GitLab container registry
+    - kas.git.homelab.me         # GitLab Kubernetes Agent Server
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-kas-cert
+  namespace: gitlab
+spec:
+  secretName: gitlab-kas-local-tls
+  commonName: kas.git.homelab.me
+  dnsNames:
+    - kas.git.homelab.me
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-minio-cert
+  namespace: gitlab
+spec:
+  secretName: gitlab-minio-local-tls
+  commonName: minio.git.homelab.me
+  dnsNames:
+    - minio.git.homelab.me
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: gitlab-registry-cert
+  namespace: gitlab
+spec:
+  secretName: gitlab-registry-local-tls
+  commonName: registry.git.homelab.me
+  dnsNames:
+    - registry.git.homelab.me
+  issuerRef:
+    name: local-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
