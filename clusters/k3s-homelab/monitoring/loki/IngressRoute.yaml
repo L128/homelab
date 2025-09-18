@@ -15,6 +15,9 @@ spec:
     services:
     - name: loki
       port: 3100
+  - match: Host(`loki-gateway.app.homelab.me`) && PathPrefix(`/`)
+    kind: Rule
+    services:
     - name: loki-gateway
       port: 80
   # tls:
