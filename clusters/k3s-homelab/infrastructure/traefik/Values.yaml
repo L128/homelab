@@ -4,22 +4,12 @@ deployment:
 
 # 入口点配置
 ports:
-  traefik:
-    enabled: true
   web:
-    enabled: true
-    port: 80
-    expose: true
-    exposedPort: 80
-    protocol: TCP
-  websecure:
-    enabled: true
-    port: 443
-    expose: true
-    exposedPort: 443
-    protocol: TCP
-    tls:
-      enabled: true
+    redirections:
+      entryPoint:
+        to: websecure
+        scheme: https
+        permanent: true
 
 dashboard:
   enabled: true 
