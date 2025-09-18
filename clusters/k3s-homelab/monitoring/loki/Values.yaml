@@ -1,85 +1,54 @@
 loki:
-  # 修正schema_config配置，确保格式严格符合要求
-  config: |
-    schema_config:
-      configs:
-        - from: "2024-04-01"
-          object_store: s3  # 与下方storage.type保持一致
-          store: tsdb       # 存储引擎（v13 schema推荐使用tsdb）
-          schema: v13       # 明确指定schema版本
-          index:
-            prefix: index_  # 索引前缀
-            period: 24h     # 索引周期
-    # 补充必要的存储配置（与storage部分呼应）
-    storage_config:
-      tsdb_shipper:
-        active_index_directory: /var/loki/index
-        cache_location: /var/loki/cache
-        shared_store: s3  # 与object_store保持一致
-      aws:
-        s3: "s3://loki-chunks"  # 对应storage.bucketNames.chunks
-        region: "us-east-1"
-        endpoint: "minio.default.svc.cluster.local:9000"
-        insecure: true
+  commonConfig:
+    replication_factor: 3
+  schemaConfig:
+    configs:
+      - from: "2024-04-01"
+        store: tsdb
+        object_store: s3
+        schema: v13
+        index:
+          prefix: loki_index_
+          period: 24h
+  pattern_ingester:
+      enabled: true
+  limits_config:
+    allow_structured_metadata: true
+    volume_enabled: true
+  ruler:
+    enable_api: true
 
-  # 保持原有的存储配置
-  storage:
-    type: s3
-    s3:
-      endpoint: "minio.default.svc.cluster.local:9000"
-      region: "us-east-1"
-      accessKeyId: "${MINIO_ACCESS_KEY}"
-      secretAccessKey: "${MINIO_SECRET_KEY}"
-      insecure: true
-    bucketNames:
-      chunks: "loki-chunks"
-      ruler: "loki-ruler"
-      admin: "loki-admin"
-  
-  persistence:
-    enabled: true
-    storageClassName: "longhorn"
-    size: 50Gi
-    persistentVolumeClaimRetentionPolicy:
-      whenDeleted: Retain
-      whenScaled: Retain
-  
-  # 存储配置 - SimpleScalable 模式需要对象存储
-  storage:
-    # 定义对象存储类型
-    type: s3
-    # 配置存储后端（示例为 MinIO）
-    s3:
-      endpoint: "minio.default.svc.cluster.local:9000"  # 存储端点
-      region: "us-east-1"
-      accessKeyId: "${MINIO_ACCESS_KEY}"  # 使用 secret 存储凭证
-      secretAccessKey: "${MINIO_SECRET_KEY}"
-      insecure: true  # 对于没有 TLS 的 MinIO
-    # 必需的存储桶名称（解决错误的关键）
-    bucketNames:
-      chunks: "loki-chunks"  # 用于块存储的桶
-      ruler: "loki-ruler"    # 用于 ruler 的桶
-      admin: "loki-admin"    # 用于管理操作的桶
+minio:
+  enabled: true
+      
+deploymentMode: SingleBinary
 
-# 资源请求和限制配置
-resources:
-  requests:
-    cpu: "100m"
-    memory: "256Mi"
-  limits:
-    cpu: "1"
-    memory: "1Gi"
+singleBinary:
+  replicas: 3
 
-# 亲和性配置（默认值：空）
-affinity:
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 100
-      podAffinityTerm:
-        labelSelector:
-          matchExpressions:
-          - key: app.kubernetes.io/name
-            operator: In
-            values:
-            - loki
-        topologyKey: kubernetes.io/hostname
+# Zero out replica counts of other deployment modes
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
+
+ingester:
+  replicas: 0
+querier:
+  replicas: 0
+queryFrontend:
+  replicas: 0
+queryScheduler:
+  replicas: 0
+distributor:
+  replicas: 0
+compactor:
+  replicas: 0
+indexGateway:
+  replicas: 0
+bloomCompactor:
+  replicas: 0
+bloomGateway:
+  replicas: 0
