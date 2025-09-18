@@ -1,18 +1,40 @@
-# Loki 自定义配置（补丁格式）
-
-# 持久化存储配置（默认值：false）
 loki:
-  # 核心配置 - 改为字符串格式（关键修正）
+  # 修正schema_config配置，确保格式严格符合要求
   config: |
     schema_config:
       configs:
         - from: "2024-04-01"
-          object_store: s3
-          store: tsdb
-          schema: v13
+          object_store: s3  # 与下方storage.type保持一致
+          store: tsdb       # 存储引擎（v13 schema推荐使用tsdb）
+          schema: v13       # 明确指定schema版本
           index:
-            prefix: index_
-            period: 24h
+            prefix: index_  # 索引前缀
+            period: 24h     # 索引周期
+    # 补充必要的存储配置（与storage部分呼应）
+    storage_config:
+      tsdb_shipper:
+        active_index_directory: /var/loki/index
+        cache_location: /var/loki/cache
+        shared_store: s3  # 与object_store保持一致
+      aws:
+        s3: "s3://loki-chunks"  # 对应storage.bucketNames.chunks
+        region: "us-east-1"
+        endpoint: "minio.default.svc.cluster.local:9000"
+        insecure: true
+
+  # 保持原有的存储配置
+  storage:
+    type: s3
+    s3:
+      endpoint: "minio.default.svc.cluster.local:9000"
+      region: "us-east-1"
+      accessKeyId: "${MINIO_ACCESS_KEY}"
+      secretAccessKey: "${MINIO_SECRET_KEY}"
+      insecure: true
+    bucketNames:
+      chunks: "loki-chunks"
+      ruler: "loki-ruler"
+      admin: "loki-admin"
   
   persistence:
     enabled: true
