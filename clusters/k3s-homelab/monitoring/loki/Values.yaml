@@ -5,7 +5,7 @@ loki:
   # 核心配置 - 添加缺失的 schema_config
   config:
     # 存储架构配置（解决 Helm 安装失败的关键）
-    schemaConfig:
+    schema_config:
       configs:
         - from: "2024-04-01"  # 使用近期日期作为起始点
           object_store: s3  # 与下方 storage.type 保持一致
