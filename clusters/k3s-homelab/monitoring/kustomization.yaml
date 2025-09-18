@@ -4,4 +4,4 @@ resources:
   - cert/
   - alloy/
   - kube-prometheus-stack/
-  - loki/
+  # - loki/
