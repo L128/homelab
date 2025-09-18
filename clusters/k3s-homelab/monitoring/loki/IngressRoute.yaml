@@ -20,5 +20,5 @@ spec:
     services:
     - name: loki-gateway
       port: 80
-  # tls:
+  tls:
     secretName: monitoring-tls
