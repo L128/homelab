@@ -7,10 +7,10 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`loki.app.homelab.me`)
-      kind: Rule
-      services:
-        - name: loki
-          port: 3100
+  - match: Host(`loki.app.homelab.me`)
+    kind: Rule
+    services:
+    - name: loki
+      port: 3100
   tls:
-    secretName: monitoring-tls  # 使用与其他监控组件相同的TLS证书
+    secretName: monitoring-tls
