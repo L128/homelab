@@ -4,7 +4,7 @@ metadata:
   name: coredns-custom
   namespace: kube-system
 data:
-  homelab.server.conf: |
+  homelab.server: |
     homelab.me:53 {
         forward . 192.168.50.110;
         log;
