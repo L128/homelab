@@ -17,6 +17,8 @@ loki:
     volume_enabled: true
   ruler:
     enable_api: true
+  ui:
+    enabled: true
 
 minio:
   enabled: true
