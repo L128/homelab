@@ -1,34 +1,34 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: loki
+  name: tempo
   namespace: monitoring
 spec:
-  interval: 24h
+  interval: 24h  # 与其他组件保持一致的检查间隔
   timeout: 1h
   chart:
     spec:
-      chart: loki
-      version: x.x.x
+      chart: tempo  # Tempo的Helm Chart名称
+      version: x.x.x  # 替换为实际版本（如1.8.0）
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: grafana  # 关联上面定义的Grafana仓库
       interval: 5m
-  releaseName: loki
+  releaseName: tempo
   install:
     remediation:
-      retries: 3
+      retries: 3  # 安装失败重试次数（与其他组件一致）
   upgrade:
     remediation:
-      retries: 3
+      retries: 3  # 升级失败重试次数
   test:
     enable: true
   driftDetection:
     mode: enabled
     ignore:
-    - paths: ["/spec/replicas"]
-      target:
-        kind: Deployment
+      - paths: ["/spec/replicas"]  # 忽略副本数漂移（与其他组件一致）
+        target:
+          kind: Deployment
   valuesFrom:
-  - kind: ConfigMap
-    name: loki-values
+    - kind: ConfigMap
+      name: tempo-values  # 引用由Values.yaml生成的ConfigMap
