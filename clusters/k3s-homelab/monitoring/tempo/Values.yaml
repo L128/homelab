@@ -9,7 +9,7 @@ tempo:
       s3:
         endpoint: loki-minio:9000  # 复用Loki的MinIO服务
         bucket: tempo
-        access_key: logs-user
+        access_key: root-user
         secret_key: supersecretpassword
         insecure: true  # 内部服务可禁用TLS
       local:
