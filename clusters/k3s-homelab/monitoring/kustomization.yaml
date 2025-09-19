@@ -6,5 +6,5 @@ resources:
   - alloy/
   - kube-prometheus-stack/
   - loki/
-  - k8s-monitoring/
+  # - k8s-monitoring/
   # - tempo/
