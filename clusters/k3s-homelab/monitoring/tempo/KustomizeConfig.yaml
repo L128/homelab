@@ -1,0 +1,7 @@
+# tempo/KustomizeConfig.yaml
+nameReference:
+  - kind: ConfigMap
+    version: v1
+    fieldSpecs:
+      - path: spec/valuesFrom/name  # 关联HelmRelease中valuesFrom的name字段
+        kind: HelmRelease

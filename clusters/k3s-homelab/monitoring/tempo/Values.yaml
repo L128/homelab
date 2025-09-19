@@ -1,0 +1,36 @@
+tempo:
+  deploymentMode: singleBinary  # 单节点模式（适合小规模环境，与Loki一致）
+  replicaCount: 1
+
+  # 存储配置（使用Longhorn作为存储类，与Prometheus/Loki保持一致）
+  storage:
+    backend: s3  # 可选：使用S3兼容存储（如MinIO，Loki已启用）
+    s3:
+      endpoint: minio.loki.svc.cluster.local:9000  # 复用Loki的MinIO服务
+      bucket: tempo
+      access_key: ${MINIO_ACCESS_KEY}
+      secret_key: ${MINIO_SECRET_KEY}
+      insecure: true  # 内部服务可禁用TLS
+    local:
+      path: /var/tempo/data  # 本地存储路径（若不使用S3）
+
+  # 资源限制（根据实际需求调整）
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+
+# 持久化配置（若使用本地存储）
+persistence:
+  enabled: true
+  storageClassName: "longhorn"  # 与其他组件共用Longhorn存储类
+  size: 50Gi  # 存储容量
+
+# 网络配置
+service:
+  ports:
+    http: 3200  # Tempo默认HTTP端口
+    grpc: 9095  # gRPC端口（用于接收追踪数据）

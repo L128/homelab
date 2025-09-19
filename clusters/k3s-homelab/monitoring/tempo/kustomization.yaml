@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: monitoring  # 统一使用monitoring命名空间
+resources:
+  - HelmRelease.yaml     # 引用Helm部署配置
+  - IngressRoute.yaml  # 可选：若需要外部访问，添加Ingress配置
+
+# 将Values.yaml生成为ConfigMap，供HelmRelease引用
+configMapGenerator:
+  - name: tempo-values
+    files:
+      - values.yaml=Values.yaml
+
+# 配置Kustomize引用规则（与其他组件一致）
+configurations:
+  - KustomizeConfig.yaml
