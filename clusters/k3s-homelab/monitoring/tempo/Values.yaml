@@ -12,6 +12,7 @@ tempo:
         access_key: root-user
         secret_key: supersecretpassword
         insecure: true  # 内部服务可禁用TLS
+        signature_version: s3v4  # 使用AWS4-HMAC-SHA256认证机制
       local:
         path: /var/tempo/traces  # 本地存储路径（若不使用S3）
       wal:
