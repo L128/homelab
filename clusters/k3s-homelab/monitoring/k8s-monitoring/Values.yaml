@@ -1,9 +1,5 @@
-# yamllint disable rule:line-length rule:comments-indentation
----
 cluster:
-  # -- The name for this cluster.
-  # @section -- Cluster
-  name: ""
+  name: k3s-homelab
 
 #
 # Global settings
