@@ -4,15 +4,18 @@ tempo:
 
   # 存储配置（使用Longhorn作为存储类，与Prometheus/Loki保持一致）
   storage:
-    backend: s3  # 可选：使用S3兼容存储（如MinIO，Loki已启用）
-    s3:
-      endpoint: minio.loki.svc.cluster.local:9000  # 复用Loki的MinIO服务
-      bucket: tempo
-      access_key: ${MINIO_ACCESS_KEY}
-      secret_key: ${MINIO_SECRET_KEY}
-      insecure: true  # 内部服务可禁用TLS
-    local:
-      path: /var/tempo/data  # 本地存储路径（若不使用S3）
+    trace:
+      backend: s3  # 可选：使用S3兼容存储（如MinIO，Loki已启用）
+      s3:
+        endpoint: minio.loki.svc.cluster.local:9000  # 复用Loki的MinIO服务
+        bucket: tempo
+        access_key: ${MINIO_ACCESS_KEY}
+        secret_key: ${MINIO_SECRET_KEY}
+        insecure: true  # 内部服务可禁用TLS
+      local:
+        path: /var/tempo/traces  # 本地存储路径（若不使用S3）
+      wal:
+        path: /var/tempo/wal  # WAL存储路径
 
   # 资源限制（根据实际需求调整）
   resources:
