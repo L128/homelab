@@ -7,7 +7,7 @@ tempo:
     trace:
       backend: s3  # 可选：使用S3兼容存储（如MinIO，Loki已启用）
       s3:
-        endpoint: minio.loki.svc.cluster.local:9000  # 复用Loki的MinIO服务
+        endpoint: loki-minio:9000  # 复用Loki的MinIO服务
         bucket: tempo
         access_key: ${MINIO_ACCESS_KEY}
         secret_key: ${MINIO_SECRET_KEY}
