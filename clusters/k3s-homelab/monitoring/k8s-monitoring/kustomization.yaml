@@ -1,0 +1,11 @@
+kind: Kustomization
+namespace: monitoring
+resources:
+  # - HelmRepository.yaml
+  - HelmRelease.yaml
+configMapGenerator:
+  - name: k8s-monitoring-values
+    files:
+      - values.yaml=Values.yaml
+configurations:
+  - KustomizeConfig.yaml

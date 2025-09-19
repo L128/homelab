@@ -5,3 +5,4 @@ resources:
   - alloy/
   - kube-prometheus-stack/
   - loki/
+  - k8s-monitoring/
