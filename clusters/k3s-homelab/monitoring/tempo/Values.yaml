@@ -28,9 +28,3 @@ persistence:
   enabled: true
   storageClassName: "longhorn"  # 与其他组件共用Longhorn存储类
   size: 50Gi  # 存储容量
-
-# 网络配置
-service:
-  ports:
-    http: 3200  # Tempo默认HTTP端口
-    grpc: 9095  # gRPC端口（用于接收追踪数据）
