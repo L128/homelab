@@ -1,36 +1,85 @@
 cluster:
   name: k3s-homelab
+destinations:
+  # - name: hostedMetrics
+  #   type: prometheus
+  #   url: https://prometheus.example.com/api/prom/push
+  #   auth:
+  #     type: basic
+  #     username: "my-username"
+  #     password: "my-password"
+
+  - name: localPrometheus
+    type: prometheus
+    url: http://prometheus.monitoring.svc.cluster.local:9090
+
+  - name: hostedLogs
+    type: loki
+    url: https://loki.app.homelab.me/loki/api/v1/push
+    # auth:
+    #   type: basic
+    #   username: "my-username"
+    #   password: "my-password"
+    #   tenantIdFrom: env("LOKI_TENANT_ID")
+
+  # - name: otlpGateway
+  #   type: otlp
+  #   url: https://otlp.example.com:4317/v1/traces
+  #   auth:
+  #     type: basic
+  #     username: "my-username"
+  #     password: "my-password"
+  #   metrics: { enabled: true }
+  #   logs:    { enabled: true }
+  #   traces:  { enabled: true }
+
 clusterMetrics:
   enabled: true
+
 clusterEvents:
   enabled: true
+
 nodeLogs:
   enabled: true
+
 podLogs:
   enabled: true
+
 podLogsViaKubernetesApi:
   enabled: true
+
 applicationObservability:
   enabled: true
+
 autoInstrumentation:
   enabled: true
+
 annotationAutodiscovery:
   enabled: true
+
 prometheusOperatorObjects:
   enabled: true
+
 profiling:
   enabled: true
+
 profilesReceiver:
   enabled: true
+
 selfReporting:
   enabled: true
+
 alloy-metrics:
   enabled: true
+
 alloy-singleton:
   enabled: true
+
 alloy-logs:
   enabled: true
+
 alloy-receiver:
   enabled: true
+
 alloy-profiles:
   enabled: true
