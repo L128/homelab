@@ -30,10 +30,11 @@ destinations:
 # 启用必要的监控功能（官网推荐核心功能）
 clusterMetrics:
   enabled: true  # 采集集群级metrics（节点、命名空间等）
-  destinations: ["loki"]
+  destinations: ["localPrometheus"]  # 改为指向Prometheus的destination（localPrometheus）
 
 clusterEvents:
   enabled: true  # 采集Kubernetes事件（如Pod创建/删除）
+  destinations: ["localLoki"]  # 指向Loki类型的localLoki
 
 # 启用 alloy-singleton 收集器（解决 Cluster events 依赖问题）
 alloy-singleton:
@@ -41,13 +42,13 @@ alloy-singleton:
 
 nodeLogs:
   enabled: true  # 采集节点日志（依赖Alloy的日志挂载配置）
-  destinations: ["loki"]
+  destinations: ["localLoki"]  # 与destinations中Loki的name保持一致
 
 podLogs:
   enabled: true  # 采集Pod日志
   podLogsViaKubernetesApi:
     enabled: true  # 通过K8s API采集Pod日志（减轻节点压力）
-  destinations: ["loki"]
+  destinations: ["localLoki"]  # 匹配Loki目标的name
 
 applicationObservability:
   enabled: true  # 应用可观测性（自动发现应用并采集数据）
@@ -58,6 +59,7 @@ applicationObservability:
         enabled: true  # 启用 gRPC 协议接收
       http:
         enabled: true  # 可选：是否启用 HTTP 协议接收
+  destinations: ["localPrometheus", "localLoki", "localTempo"]  # 分别对应metrics、logs、traces
 
 # 与Alloy协同（已部署Alloy作为采集器）
 alloy-metrics:
@@ -70,6 +72,7 @@ alloy-receiver:
 # 自动 instrumentation（为应用注入监控探针）
 autoInstrumentation:
   enabled: true
+  destinations: ["localPrometheus", "localTempo"]  # 指标→Prometheus，追踪→Tempo
   # 可选：指定需要自动注入的命名空间
   # namespaces:
   #   - default
@@ -78,6 +81,7 @@ autoInstrumentation:
 # 服务发现（基于注解自动发现监控目标）
 annotationAutodiscovery:
   enabled: true  # 启用基于注解的服务发现（如`monitoring.grafana.com/scrape: "true"`）
+  destinations: ["localPrometheus"]  # 指向Prometheus存储指标
 
 # 持久化与资源配置（按需调整）
 resources:
