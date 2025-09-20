@@ -34,6 +34,10 @@ clusterMetrics:
 clusterEvents:
   enabled: true  # 采集Kubernetes事件（如Pod创建/删除）
 
+# 启用 alloy-singleton 收集器（解决 Cluster events 依赖问题）
+alloy-singleton:
+  enabled: true  # 必须设置为 true，否则 Cluster events 功能无法工作
+
 nodeLogs:
   enabled: true  # 采集节点日志（依赖Alloy的日志挂载配置）
 
