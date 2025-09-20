@@ -1,73 +1,85 @@
-# 基于官方 monolithic 部署模式，适配 MinIO S3 存储
+# values.yaml：Loki 单副本 + 对接外部 MinIO 配置
 loki:
   commonConfig:
-    replication_factor: 1
-  # 单节点部署配置
-  deploymentMode: SingleBinary
-  singleBinary:
-    replicas: 1  # 单副本部署
-
-  # 存储配置（使用 MinIO S3）
-  storage:
-    type: s3
-    config:
-      s3:
-        endpoint: minio:9000  # 指向 MinIO 服务（同命名空间下）
-        bucketnames: loki  # 存储桶名称（需提前在 MinIO 中创建或通过初始化配置）
-        insecure: true  # 本地 MinIO 通常不启用 HTTPS
-        s3forcepathstyle: true  # 强制路径风格（MinIO 兼容要求）
-
-  # 架构配置（使用 TSDB 存储模式）
+    replication_factor: 1  # 单副本强制设为 1，否则请求失败（官方要求）
   schemaConfig:
     configs:
-      - from: "2024-01-01"
-        store: tsdb
-        object_store: s3
-        schema: v13
+      - from: "2024-04-01"  # 日志索引生效时间（可按需调整）
+        store: tsdb         # 推荐存储引擎（Loki 稳定版默认）
+        object_store: s3    # 对接 S3 兼容存储（MinIO 符合此标准）
+        schema: v13         # Loki 数据 schema 版本（官方最新稳定版）
         index:
-          prefix: loki_index_
-          period: 24h
+          prefix: loki_index_  # 索引前缀（避免与其他服务冲突）
+          period: 24h          # 索引滚动周期（每日一个索引，便于管理）
+  
+  # 关键：配置外部 MinIO 的 S3 兼容参数（核心对接逻辑）
+  storage_config:
+    aws:
+      s3forcepathstyle: true  # MinIO 默认使用 Path Style 访问，必须设为 true
+      endpoint: minio:9000  # 指向 MinIO 服务（同命名空间下）
+      region: "us-east-1"     # MinIO 忽略 Region，填任意有效值即可（如 us-east-1）
+      # access_key_id: <你的 MinIO AccessKey>  # 例：minioadmin（需与你的 MinIO 一致）
+      # secret_access_key: <你的 MinIO SecretKey>  # 例：minioadmin（需与你的 MinIO 一致）
+      bucketnames: loki-chunks  # 例：loki-chunks（存储日志块）
+  
+  # 补充：Loki 其他模块的存储配置（Ruler/Admin 数据）
+  storage:
+    type: s3
+    bucketNames:
+      chunks: loki-chunks  # 与 storage_config 中的 bucketnames 一致（例：loki-chunks）
+      ruler: loki-ruler    # 例：loki-ruler（存储告警规则）
+      admin: loki-admin    # 例：loki-admin（存储管理数据）
+    s3:
+      s3ForcePathStyle: true
+      endpoint: minio:9000    # 与上方 storage_config 一致
+      region: "us-east-1"                # 与上方一致
+      # accessKeyId: <你的 MinIO AccessKey> # 与上方一致
+      # secretAccessKey: <你的 MinIO SecretKey> # 与上方一致
+      insecure: true  # 本地测试场景（MinIO 用 HTTP）设为 true；若 MinIO 启用 HTTPS 则设为 false
 
-  # 限制配置（按需调整）
+  # 其他基础配置（开发/测试场景推荐开启）
+  pattern_ingester:
+    enabled: true  # 启用日志模式检测（便于识别日志格式）
   limits_config:
-    retention_period: 72h  # 日志保留时间
-    max_chunk_age: 1h
-    allow_structured_metadata: true
+    allow_structured_metadata: true  # 允许结构化元数据（日志筛选更灵活）
+    volume_enabled: true             # 启用卷存储（本地 K8s 场景推荐）
+    retention_period: 672h           # 日志保留期（28 天，可按需调整）
+  ruler:
+    enable_api: true  # 启用 Ruler API（便于后续配置告警规则）
 
-  # 禁用分布式组件（单节点模式）
-  distributor:
-    replicas: 0
-  ingester:
-    replicas: 0
-  querier:
-    replicas: 0
-  queryFrontend:
-    replicas: 0
-  compactor:
-    replicas: 0
-  indexGateway:
-    replicas: 0
-
-# 关闭内置 MinIO（使用外部部署的 MinIO）
+# 关键：禁用 Helm Chart 内置的 MinIO（避免与外部 MinIO 冲突）
 minio:
   enabled: false
 
-# 持久化配置（可选，单节点模式可仅用临时存储或本地持久化）
-persistence:
-  enabled: true
-  storageClassName: longhorn  # 与 Tempo 保持一致的存储类
-  size: 50Gi  # 根据日志量调整
+# 部署模式：Monolithic（单二进制文件）
+deploymentMode: SingleBinary
 
-# 资源配置（按需调整）
-resources:
-  requests:
-    cpu: 500m
-    memory: 1Gi
-  limits:
-    cpu: 2000m
-    memory: 2Gi
+# 单副本配置（核心）
+singleBinary:
+  replicas: 1  # 仅部署 1 个 Loki 副本
 
-# 网络配置（暴露服务）
-# service:
-#   type: ClusterIP
-#   port: 3100
+# 禁用其他部署模式（避免资源浪费和冲突）
+backend:
+  replicas: 0
+read:
+  replicas: 0
+write:
+  replicas: 0
+ingester:
+  replicas: 0
+querier:
+  replicas: 0
+queryFrontend:
+  replicas: 0
+queryScheduler:
+  replicas: 0
+distributor:
+  replicas: 0
+compactor:
+  replicas: 0
+indexGateway:
+  replicas: 0
+bloomCompactor:
+  replicas: 0
+bloomGateway:
+  replicas: 0
