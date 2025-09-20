@@ -40,3 +40,11 @@ spec:
     name: minio-credentials
     valuesKey: rootPassword
     targetPath: loki.storage_config.aws.secret_access_key
+  - kind: Secret
+    name: minio-credentials
+    valuesKey: rootUser
+    targetPath: loki.storage.s3.access_key_id
+  - kind: Secret
+    name: minio-credentials
+    valuesKey: rootPassword
+    targetPath: loki.storage.s3.secret_access_key
