@@ -35,8 +35,8 @@ spec:
     - kind: Secret
       name: minio-credentials
       valuesKey: rootUser  # 对应Secret中的access-key字段
-      targetPath: tempo.storage.s3.access_key  # 映射到Tempo配置路径
+      targetPath: tempo.storage.trace.s3.access_key  # 映射到Tempo配置路径
     - kind: Secret
       name: minio-credentials
       valuesKey: rootPassword  # 对应Secret中的secret-key字段
-      targetPath: tempo.storage.s3.secret_key  # 映射到Tempo配置路径
+      targetPath: tempo.storage.trace.s3.secret_key  # 映射到Tempo配置路径
