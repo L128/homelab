@@ -39,3 +39,9 @@ grafana:
     accessModes: ["ReadWriteOnce"]
     size: 10Gi  # Grafana存储容量
     # existingClaim: ""  # 若使用已有PVC，可取消注释并指定名称
+
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false # 改用 Alloy 采集 Kubernetes 资源状态

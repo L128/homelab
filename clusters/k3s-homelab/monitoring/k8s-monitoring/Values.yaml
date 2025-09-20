@@ -29,7 +29,7 @@ destinations:
 
 # 启用必要的监控功能（官网推荐核心功能）
 clusterMetrics:
-  enabled: false  # 采集集群级metrics（节点、命名空间等）
+  enabled: true  # 采集集群级metrics（节点、命名空间等）
 
 clusterEvents:
   enabled: true  # 采集Kubernetes事件（如Pod创建/删除）
