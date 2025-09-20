@@ -7,8 +7,6 @@ tempo:
       s3:
         endpoint: minio:9000
         bucket: tempo
-        access_key: ""  # 由Secret注入，无需填写
-        secret_key: ""  # 由Secret注入，无需填写
         insecure: true
 # 持久化配置（若使用本地存储）
 persistence:
