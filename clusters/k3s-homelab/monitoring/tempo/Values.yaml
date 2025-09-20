@@ -1,8 +1,6 @@
 tempo:
   deploymentMode: singleBinary  # 单节点模式（适合小规模环境，与Loki一致）
   replicaCount: 1
-
-  # 存储配置（使用Longhorn作为存储类，与Prometheus/Loki保持一致）
   storage:
     trace:
       backend: s3
@@ -12,15 +10,6 @@ tempo:
         access_key: ""  # 由Secret注入，无需填写
         secret_key: ""  # 由Secret注入，无需填写
         insecure: true
-
-  resources:
-    requests:
-      cpu: "100m"
-      memory: "256Mi"
-    limits:
-      cpu: "1"
-      memory: "1Gi"
-
 # 持久化配置（若使用本地存储）
 persistence:
   enabled: true
