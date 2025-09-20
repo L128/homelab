@@ -1,5 +1,6 @@
 # values.yaml：Loki 单副本 + 对接外部 MinIO 配置
 loki:
+  auth_enabled: false
   commonConfig:
     replication_factor: 1  # 单副本强制设为 1，否则请求失败（官方要求）
   schemaConfig:

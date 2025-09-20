@@ -1,0 +1,92 @@
+# 启用必要的日志目录挂载，以便Alloy访问主机日志
+alloy:
+  mounts:
+    # 挂载/var/log目录收集系统日志
+    varlog: true
+    # 挂载docker容器日志目录（如使用containerd可调整路径）
+    dockercontainers: true
+    extra:
+      - name: podlogs
+        hostPath:
+          path: /var/log/pods
+        mountPath: /var/log/pods
+        readOnly: true
+  configMap:
+    # 创建ConfigMap存储Alloy配置
+    create: true
+    # Alloy核心配置：采集日志并发送到Loki
+    content: |
+      # 采集主机/var/log目录下的日志文件
+      loki.source.file "varlog" {
+        targets = [
+          { __path__ = "/var/log/*.log" },
+          { __path__ = "/var/log/**/*.log" },
+        ]
+        forward_to = [loki.process.logs_router.receiver]
+      }
+
+      loki.source.file "containers" {
+        targets = [
+          { __path__ = "/var/log/pods/**/*.log" },  # k3s容器日志路径
+        ]
+        # 解析containerd的JSON格式日志（与Docker日志格式兼容，可复用docker解析器）
+        pipeline_stages = [
+          docker {}
+        ]
+        forward_to = [loki.process.logs_router.receiver]
+      }
+
+      # 日志处理：添加通用标签
+      loki.process "logs_router" {
+        forward_to = [loki.write.to_loki.receiver]
+        
+        # 为日志添加节点标签
+        pipeline_stages = [
+          label_drop {
+            values = ["__path__"]
+          },
+          label_add {
+            target = "job"
+            value  = "alloy-logs"
+          },
+          label_add {
+            target = "node"
+            value  = "{{ env \"NODE_NAME\" }}"
+          }
+        ]
+      }
+
+      # 发送日志到Loki实例（根据实际Loki服务地址调整）
+      loki.write "to_loki" {
+        endpoint {
+          url = "http://loki:3100/loki/api/v1/push"
+          # 若Loki启用认证，添加basic_auth配置
+          # basic_auth {
+          #   username = "your-username"
+          #   password = "your-password"
+          # }
+        }
+        # 批量发送配置
+        batch {
+          max_entries = 1000
+          max_bytes   = 1048576
+          timeout     = "5s"
+        }
+      }
+
+# 控制器类型使用DaemonSet确保每个节点都运行日志采集
+controller:
+  type: daemonset
+  # 节点选择器（可选，根据需求限制采集节点）
+  nodeSelector: {}
+  # 容忍污点，确保在所有节点运行
+  tolerations:
+    - operator: "Exists"
+
+# 启用配置自动重载
+configReloader:
+  enabled: true
+
+# 若需要通过ServiceMonitor监控Alloy自身，可启用
+serviceMonitor:
+  enabled: false

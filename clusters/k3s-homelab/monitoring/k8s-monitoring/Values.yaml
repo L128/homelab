@@ -16,10 +16,10 @@ destinations:
     type: loki
     url: http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push  # 使用集群内部服务地址（更可靠）
     # 若Loki启用认证，添加：
-    # auth:
-    #   type: basic
-    #   username: "${LOKI_USERNAME}"
-    #   password: "${LOKI_PASSWORD}"
+    auth:
+      type: custom  # 使用自定义头部认证（适配Loki多租户）
+      headers:
+        X-Scope-OrgID: "k8s-monitoring"  # 替换为实际的Loki租户ID
 
   # 3. 发送traces到本地Tempo（已部署的Tempo服务）
   - name: localTempo
@@ -30,6 +30,7 @@ destinations:
 # 启用必要的监控功能（官网推荐核心功能）
 clusterMetrics:
   enabled: true  # 采集集群级metrics（节点、命名空间等）
+  destinations: ["loki"]
 
 clusterEvents:
   enabled: true  # 采集Kubernetes事件（如Pod创建/删除）
@@ -40,11 +41,13 @@ alloy-singleton:
 
 nodeLogs:
   enabled: true  # 采集节点日志（依赖Alloy的日志挂载配置）
+  destinations: ["loki"]
 
 podLogs:
   enabled: true  # 采集Pod日志
   podLogsViaKubernetesApi:
     enabled: true  # 通过K8s API采集Pod日志（减轻节点压力）
+  destinations: ["loki"]
 
 applicationObservability:
   enabled: true  # 应用可观测性（自动发现应用并采集数据）
