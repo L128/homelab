@@ -42,7 +42,7 @@ prometheus:
     namespaceSelector:
       # 指定目标 Service 所在的命名空间（k8s-monitoring）
       matchNames:
-        - k8s-monitoring
+        - monitoring
     endpoints:
       - port: metrics  # 对应 node-exporter Service 的端口名
         interval: 15s  # 抓取间隔
