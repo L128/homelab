@@ -37,7 +37,8 @@ prometheus:
     selector:
       # 匹配 k8s-monitoring 命名空间中 node-exporter Service 的标签
       matchLabels:
-        app: node-exporter  # 需与实际 Service 标签一致
+        app.kubernetes.io/name: node-exporter  # 示例：根据实际标签调整
+        app.kubernetes.io/instance: k8s-monitoring  # 示例：根据实际标签调整
     namespaceSelector:
       # 指定目标 Service 所在的命名空间（k8s-monitoring）
       matchNames:
