@@ -32,21 +32,108 @@ prometheus:
       whenDeleted: Retain
       whenScaled: Retain
   additionalServiceMonitors:
-  - name: k8s-monitoring-node-exporter  # ServiceMonitor 名称
-    namespace: monitoring  # 通常与 Prometheus 同命名空间（如 monitoring）
-    selector:
-      # 匹配 k8s-monitoring 命名空间中 node-exporter Service 的标签
-      matchLabels:
-        app.kubernetes.io/name: node-exporter  # 示例：根据实际标签调整
-        app.kubernetes.io/instance: k8s-monitoring  # 示例：根据实际标签调整
-    namespaceSelector:
-      # 指定目标 Service 所在的命名空间（k8s-monitoring）
-      matchNames:
-        - monitoring
-    endpoints:
-      - port: metrics  # 对应 node-exporter Service 的端口名
-        interval: 15s  # 抓取间隔
-        path: /metrics  # 指标暴露路径（node-exporter 默认是 /metrics）
+    ###########################################################################
+    # 1. k8s-monitoring-node-exporter（节点级指标，已提供模板，此处保留并补全）
+    ###########################################################################
+    - name: k8s-monitoring-node-exporter
+      namespace: monitoring  # 与 Prometheus 同命名空间（通常为 monitoring）
+      selector:
+        # 匹配 node-exporter Service 的标签（需与集群实际标签一致，可通过 kubectl get svc -n monitoring 查看）
+        matchLabels:
+          app.kubernetes.io/name: node-exporter
+          app.kubernetes.io/instance: k8s-monitoring  # 对应 k8s-monitoring Chart 的实例名
+      namespaceSelector:
+        # 目标 Service 所在命名空间（k8s-monitoring 组件默认部署在 monitoring）
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: metrics  # 对应 node-exporter Service 的端口名（默认是 metrics）
+          interval: 15s  # 指标抓取间隔（根据需求调整，15s 为常规选择）
+          path: /metrics  # node-exporter 默认指标路径
+          scrapeTimeout: 10s  # 抓取超时（避免阻塞，建议小于 interval）
+
+    ###########################################################################
+    # 2. k8s-monitoring-kube-state-metrics（K8s 资源对象指标）
+    ###########################################################################
+    - name: k8s-monitoring-kube-state-metrics
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: kube-state-metrics
+          app.kubernetes.io/instance: k8s-monitoring
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # kube-state-metrics 默认端口名（非 https 场景）
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 4. k8s-monitoring-alloy-metrics（Alloy 指标处理模块，StatefulSet）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-metrics
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-metrics
+          app.kubernetes.io/instance: k8s-monitoring-alloy-metrics
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: metrics  # Alloy metrics 组件默认端口名
+          interval: 15s
+          path: /metrics  # 暴露 Alloy 自身运行状态及转发的指标
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 5. k8s-monitoring-alloy-singleton（Alloy 单例组件，处理全局任务）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-singleton
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-singleton
+          app.kubernetes.io/instance: k8s-monitoring-alloy-singleton
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: metrics  # Alloy singleton 组件默认端口名
+          interval: 15s
+          path: /metrics  # 暴露全局任务（如聚合指标）的运行状态
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 6. k8s-monitoring-alloy-operator（Alloy 控制器，管理 Alloy 实例）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-operator
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-operator
+          app.kubernetes.io/instance: k8s-monitoring
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # Operator 默认端口名（暴露控制器运行指标）
+          interval: 30s  # Operator 指标变化较慢，可适当延长间隔
+          path: /metrics  # 默认指标路径（如 reconcile 次数、实例状态）
+          scrapeTimeout: 10s
+  additionalPodMonitors:
+    - name: k8s-monitoring-beyla
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: beyla
+          app.kubernetes.io/instance: k8s-monitoring
+      podMetricsEndpoints:
+        - port: metrics  # 对应 Beyla Pod 的 metrics 端口
+          interval: 15s
+          path: /metrics
 
 grafana:
   persistence:
