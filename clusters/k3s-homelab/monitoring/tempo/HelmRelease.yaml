@@ -34,9 +34,9 @@ spec:
       name: tempo-values  # 引用由Values.yaml生成的ConfigMap
     - kind: Secret
       name: minio-credentials
-      valuesKey: access-key  # 对应Secret中的access-key字段
+      valuesKey: rootUser  # 对应Secret中的access-key字段
       targetPath: tempo.storage.s3.access_key  # 映射到Tempo配置路径
     - kind: Secret
       name: minio-credentials
-      valuesKey: secret-key  # 对应Secret中的secret-key字段
+      valuesKey: rootPassword  # 对应Secret中的secret-key字段
       targetPath: tempo.storage.s3.secret_key  # 映射到Tempo配置路径
