@@ -5,7 +5,7 @@ metadata:
   namespace: monitoring
 spec:
   interval: 24h  # 与其他组件保持一致的检查间隔
-  timeout: 1h
+  timeout: 5m
   chart:
     spec:
       chart: tempo  # Tempo的Helm Chart名称
@@ -13,7 +13,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: grafana  # 关联上面定义的Grafana仓库
-      interval: 5m
+      # interval: 5m
   releaseName: tempo
   install:
     remediation:
@@ -32,3 +32,11 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: tempo-values  # 引用由Values.yaml生成的ConfigMap
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: access-key  # 对应Secret中的access-key字段
+      targetPath: tempo.storage.s3.access_key  # 映射到Tempo配置路径
+    - kind: Secret
+      name: minio-credentials
+      valuesKey: secret-key  # 对应Secret中的secret-key字段
+      targetPath: tempo.storage.s3.secret_key  # 映射到Tempo配置路径

@@ -12,10 +12,6 @@ tempo:
         access_key: ""  # 由Secret注入，无需填写
         secret_key: ""  # 由Secret注入，无需填写
         insecure: true
-      local:
-        path: /var/tempo/data
-      wal:
-        path: /var/tempo/wal
 
   resources:
     requests:
