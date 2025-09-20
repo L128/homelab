@@ -1,0 +1,36 @@
+# values.yaml
+# 基础配置
+namespace: monitoring
+releaseName: minio
+
+# 访问凭证（使用 Secret 管理，避免明文）
+existingSecret: minio-credentials  # 对应后续创建的 Secret 名称
+
+# 持久化存储（使用 Longhorn）
+persistence:
+  enabled: true
+  storageClass: "longhorn"  # 指定 Longhorn 存储类
+  accessMode: ReadWriteOnce  # Longhorn 支持的访问模式
+  size: 10Gi  # 存储容量，按需调整
+
+# 部署配置
+replicas: 1  # 单节点，适合 homelab
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+# 网络配置（暴露 API 和控制台端口）
+service:
+  type: ClusterIP  # 内部访问，无需 NodePort
+  port: 9000       # API 端口
+consoleService:
+  type: ClusterIP
+  port: 9001       # 控制台端口
+
+# 额外配置（可选）
+# environment:
+#   MINIO_BROWSER_REDIRECT_URL: ""  # 禁用浏览器重定向，适合内部访问
