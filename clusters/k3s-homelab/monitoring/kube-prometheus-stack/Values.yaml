@@ -31,22 +31,7 @@ prometheus:
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
-
-grafana:
-  persistence:
-    enabled: true  # 开启Grafana持久化
-    storageClassName: "longhorn"  # 使用longhorn存储类
-    accessModes: ["ReadWriteOnce"]
-    size: 10Gi  # Grafana存储容量
-    # existingClaim: ""  # 若使用已有PVC，可取消注释并指定名称
-
-nodeExporter:
-  enabled: false
-
-kubeStateMetrics:
-  enabled: false # 改用 Alloy 采集 Kubernetes 资源状态
-
-additionalServiceMonitors:
+  additionalServiceMonitors:
   - name: k8s-monitoring-node-exporter  # ServiceMonitor 名称
     namespace: monitoring  # 通常与 Prometheus 同命名空间（如 monitoring）
     selector:
@@ -61,3 +46,17 @@ additionalServiceMonitors:
       - port: metrics  # 对应 node-exporter Service 的端口名
         interval: 15s  # 抓取间隔
         path: /metrics  # 指标暴露路径（node-exporter 默认是 /metrics）
+
+grafana:
+  persistence:
+    enabled: true  # 开启Grafana持久化
+    storageClassName: "longhorn"  # 使用longhorn存储类
+    accessModes: ["ReadWriteOnce"]
+    size: 10Gi  # Grafana存储容量
+    # existingClaim: ""  # 若使用已有PVC，可取消注释并指定名称
+
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false # 改用 Alloy 采集 Kubernetes 资源状态
