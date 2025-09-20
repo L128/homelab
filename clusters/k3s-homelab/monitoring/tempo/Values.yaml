@@ -1,6 +1,4 @@
 tempo:
-  deploymentMode: singleBinary  # 单节点模式（适合小规模环境，与Loki一致）
-  replicaCount: 1
   storage:
     trace:
       backend: s3
