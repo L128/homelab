@@ -9,6 +9,12 @@ existingSecret: minio-credentials  # 对应后续创建的 Secret 名称
 # MinIO 模式设置为单机模式
 mode: standalone
 
+# 【新增】初始化存储桶配置（Tempo 需要的 tempo 桶）
+buckets:
+  - name: tempo  # 存储桶名称，必须与 Tempo 配置中的 bucket 一致
+    policy: none  # 访问策略（none/private/public/readOnly/readWrite）
+    versioning: false  # 是否启用版本控制（按需设置）
+
 # 持久化存储（使用 Longhorn）
 persistence:
   enabled: true
