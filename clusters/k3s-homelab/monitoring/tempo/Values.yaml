@@ -8,7 +8,7 @@ tempo:
         insecure: true
 persistence:
   enabled: true
-  storageClassName: "longhorn"
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   size: 10Gi
