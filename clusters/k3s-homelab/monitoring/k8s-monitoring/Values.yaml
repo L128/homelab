@@ -44,6 +44,13 @@ podLogs:
 
 applicationObservability:
   enabled: true  # 应用可观测性（自动发现应用并采集数据）
+    # 添加接收器配置（解决报错的核心）
+  receivers:
+    otlp:  # 启用 OTLP 接收器（OpenTelemetry 协议）
+      grpc:
+        enabled: true  # 启用 gRPC 协议接收
+      http:
+        enabled: true  # 可选：是否启用 HTTP 协议接收
 
 # 与Alloy协同（已部署Alloy作为采集器）
 alloy-metrics:
