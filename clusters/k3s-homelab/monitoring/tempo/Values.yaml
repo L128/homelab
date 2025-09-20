@@ -11,5 +11,3 @@ tempo:
 # 持久化配置（若使用本地存储）
 persistence:
   enabled: true
-  storageClassName: "longhorn"  # 与其他组件共用Longhorn存储类
-  size: 10Gi  # 存储容量
