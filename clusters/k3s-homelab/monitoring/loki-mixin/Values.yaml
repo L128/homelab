@@ -1,5 +1,0 @@
-grafana:
-  enabled: true
-  dashboards:
-    loki: 
-      enabled: true

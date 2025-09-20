@@ -4,10 +4,8 @@ kind: Kustomization
 resources:
   - HelmRepository/
   - cert/
-  # - alloy/
   - kube-prometheus-stack/
   - minio/
   - tempo/
   - loki/
-  - loki-mixin/
   - k8s-monitoring/
