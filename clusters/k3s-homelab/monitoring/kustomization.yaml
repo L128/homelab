@@ -8,5 +8,5 @@ resources:
   - kube-prometheus-stack/
   - minio/
   - tempo/
-  # - loki/
+  - loki/
   # - k8s-monitoring/

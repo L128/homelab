@@ -32,3 +32,11 @@ spec:
   valuesFrom:
   - kind: ConfigMap
     name: loki-values
+  - kind: Secret
+    name: minio-credentials
+    valuesKey: rootUser
+    targetPath: loki.storage.config.s3.access_key_id
+  - kind: Secret
+    name: minio-credentials
+    valuesKey: rootPassword
+    targetPath: loki.storage.config.s3.secret_access_key

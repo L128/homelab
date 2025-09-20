@@ -1,56 +1,73 @@
+# 基于官方 monolithic 部署模式，适配 MinIO S3 存储
 loki:
   commonConfig:
     replication_factor: 1
+  # 单节点部署配置
+  deploymentMode: SingleBinary
+  singleBinary:
+    replicas: 1  # 单副本部署
+
+  # 存储配置（使用 MinIO S3）
+  storage:
+    type: s3
+    config:
+      s3:
+        endpoint: minio:9000  # 指向 MinIO 服务（同命名空间下）
+        bucketnames: loki  # 存储桶名称（需提前在 MinIO 中创建或通过初始化配置）
+        insecure: true  # 本地 MinIO 通常不启用 HTTPS
+        s3forcepathstyle: true  # 强制路径风格（MinIO 兼容要求）
+
+  # 架构配置（使用 TSDB 存储模式）
   schemaConfig:
     configs:
-      - from: "2024-04-01"
+      - from: "2024-01-01"
         store: tsdb
         object_store: s3
         schema: v13
         index:
           prefix: loki_index_
           period: 24h
-  pattern_ingester:
-      enabled: true
+
+  # 限制配置（按需调整）
   limits_config:
+    retention_period: 72h  # 日志保留时间
+    max_chunk_age: 1h
     allow_structured_metadata: true
-    volume_enabled: true
-  ruler:
-    enable_api: true
-  ui:
-    enabled: true
 
+  # 禁用分布式组件（单节点模式）
+  distributor:
+    replicas: 0
+  ingester:
+    replicas: 0
+  querier:
+    replicas: 0
+  queryFrontend:
+    replicas: 0
+  compactor:
+    replicas: 0
+  indexGateway:
+    replicas: 0
+
+# 关闭内置 MinIO（使用外部部署的 MinIO）
 minio:
+  enabled: false
+
+# 持久化配置（可选，单节点模式可仅用临时存储或本地持久化）
+persistence:
   enabled: true
-      
-deploymentMode: SingleBinary
+  storageClassName: longhorn  # 与 Tempo 保持一致的存储类
+  size: 50Gi  # 根据日志量调整
 
-singleBinary:
-  replicas: 1
+# 资源配置（按需调整）
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: 2000m
+    memory: 2Gi
 
-# Zero out replica counts of other deployment modes
-backend:
-  replicas: 0
-read:
-  replicas: 0
-write:
-  replicas: 0
-
-ingester:
-  replicas: 0
-querier:
-  replicas: 0
-queryFrontend:
-  replicas: 0
-queryScheduler:
-  replicas: 0
-distributor:
-  replicas: 0
-compactor:
-  replicas: 0
-indexGateway:
-  replicas: 0
-bloomCompactor:
-  replicas: 0
-bloomGateway:
-  replicas: 0
+# 网络配置（暴露服务）
+# service:
+#   type: ClusterIP
+#   port: 3100
