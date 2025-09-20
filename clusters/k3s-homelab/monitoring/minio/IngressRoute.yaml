@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: minio-console-ingress-tls
+  namespace: monitoring
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`minio.app.homelab.me`)
+      kind: Rule
+      services:
+        - name: minio-console
+          port: 9001
+  tls:
+    secretName: monitoring-tls  # 使用监控命名空间的TLS证书

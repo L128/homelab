@@ -5,6 +5,7 @@ resources:
   - cert/
   - alloy/
   - kube-prometheus-stack/
+  - minio/
   # - loki/
   # - k8s-monitoring/
   # - tempo/

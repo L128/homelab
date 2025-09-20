@@ -6,6 +6,9 @@ releaseName: minio
 # 访问凭证（使用 Secret 管理，避免明文）
 existingSecret: minio-credentials  # 对应后续创建的 Secret 名称
 
+# MinIO 模式设置为单机模式
+mode: standalone
+
 # 持久化存储（使用 Longhorn）
 persistence:
   enabled: true

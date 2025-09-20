@@ -1,0 +1,12 @@
+kind: Kustomization
+namespace: monitoring
+resources:
+  - HelmRepository.yaml
+  - HelmRelease.yaml
+  - IngressRoute.yaml
+configMapGenerator:
+  - name: minio-values
+    files:
+      - values.yaml=Values.yaml
+configurations:
+  - KustomizeConfig.yaml
