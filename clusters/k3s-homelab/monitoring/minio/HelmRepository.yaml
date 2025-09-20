@@ -1,7 +1,0 @@
-kind: HelmRepository
-metadata:
-  name: minio
-  namespace: monitoring
-spec:
-  interval: 1d
-  url: https://charts.min.io/
