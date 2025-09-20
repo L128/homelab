@@ -6,6 +6,5 @@ tempo:
         endpoint: minio:9000
         bucket: tempo
         insecure: true
-# 持久化配置（若使用本地存储）
 persistence:
   enabled: true

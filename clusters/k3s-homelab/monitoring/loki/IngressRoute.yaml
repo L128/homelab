@@ -10,12 +10,12 @@ spec:
     - websecure
     - web
   routes:
-  - match: Host(`loki.monitoring.homelab.me`) && PathPrefix(`/`)
+  - match: Host(`loki.app.homelab.me`) && PathPrefix(`/`)
     kind: Rule
     services:
     - name: loki
       port: 3100
-  - match: Host(`loki-gateway.monitoring.homelab.me`) && PathPrefix(`/`)
+  - match: Host(`loki-gateway.app.homelab.me`) && PathPrefix(`/`)
     kind: Rule
     services:
     - name: loki-gateway

@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`minio.minitoring.homelab.me`)
+    - match: Host(`minio.app.homelab.me`)
       kind: Rule
       services:
         - name: minio-console
