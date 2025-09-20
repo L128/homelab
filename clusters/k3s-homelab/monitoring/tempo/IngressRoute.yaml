@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure  # 使用HTTPS入口
   routes:
-    - match: Host(`tempo.app.homelab.me`)  # 自定义域名（与现有规则一致）
+    - match: Host(`tempo.monitoring.homelab.me`)  # 自定义域名（与现有规则一致）
       kind: Rule
       services:
         - name: tempo  # 关联Tempo服务
