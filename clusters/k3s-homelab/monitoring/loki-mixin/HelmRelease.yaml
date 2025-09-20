@@ -1,0 +1,29 @@
+kind: HelmRelease
+metadata:
+  name: loki-mixin
+  namespace: monitoring
+spec:
+  interval: 24h
+  timeout: 1h
+  chart:
+    spec:
+      chart: loki-mixin
+      version: x.x.x
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      interval: 5m
+  releaseName: loki-mixin
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  test:
+    enable: true
+  driftDetection:
+    mode: enabled
+  valuesFrom:
+  - kind: ConfigMap
+    name: loki-mixin-values

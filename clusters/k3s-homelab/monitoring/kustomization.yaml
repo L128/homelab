@@ -9,4 +9,5 @@ resources:
   - minio/
   - tempo/
   - loki/
+  - loki-mixin/
   - k8s-monitoring/
