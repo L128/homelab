@@ -71,7 +71,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 4. k8s-monitoring-alloy-metrics（Alloy 指标处理模块，StatefulSet）
+    # 3. k8s-monitoring-alloy-metrics（Alloy 指标处理模块，StatefulSet）
     ###########################################################################
     - name: k8s-monitoring-alloy-metrics
       namespace: monitoring
@@ -89,7 +89,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 5. k8s-monitoring-alloy-singleton（Alloy 单例组件，处理全局任务）
+    # 4. k8s-monitoring-alloy-singleton（Alloy 单例组件，处理全局任务）
     ###########################################################################
     - name: k8s-monitoring-alloy-singleton
       namespace: monitoring
@@ -107,7 +107,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 6. k8s-monitoring-alloy-operator（Alloy 控制器，管理 Alloy 实例）
+    # 5. k8s-monitoring-alloy-operator（Alloy 控制器，管理 Alloy 实例）
     ###########################################################################
     - name: k8s-monitoring-alloy-operator
       namespace: monitoring
@@ -123,6 +123,114 @@ prometheus:
           interval: 30s  # Operator 指标变化较慢，可适当延长间隔
           path: /metrics  # 默认指标路径（如 reconcile 次数、实例状态）
           scrapeTimeout: 10s
+
+    ###########################################################################
+    # 6. k8s-monitoring-alloy-logs（Alloy 日志收集组件）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-logs
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-logs
+          app.kubernetes.io/instance: k8s-monitoring-alloy-logs
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 12345  # Alloy logs 组件默认指标端口
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 7. k8s-monitoring-alloy-receiver（Alloy 数据接收组件）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-receiver
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-receiver
+          app.kubernetes.io/instance: k8s-monitoring-alloy-receiver
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 12345  # Alloy receiver 组件默认指标端口
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 8. loki（日志存储与查询组件）
+    ###########################################################################
+    - name: loki
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: loki
+          app.kubernetes.io/instance: loki
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 3100  # Loki 默认指标端口
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 9. tempo（追踪数据存储与查询组件）
+    ###########################################################################
+    - name: tempo
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: tempo
+          app.kubernetes.io/instance: tempo
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 3200  # Tempo 默认指标端口
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 10. minio（对象存储服务，用于存储监控数据）
+    ###########################################################################
+    - name: minio
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app: minio
+          release: minio
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 9000  # MinIO API 端口，同时暴露 Prometheus 指标
+          interval: 30s  # 存储服务指标变化较慢，可适当延长间隔
+          path: /minio/v2/metrics/cluster  # MinIO 集群指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 11. uptime-kuma（服务健康监控组件）
+    ###########################################################################
+    - name: uptime-kuma
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: uptime-kuma
+          app.kubernetes.io/instance: uptime-kuma
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: 3001  # Uptime Kuma Web 界面端口，同时暴露 Prometheus 指标
+          interval: 30s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
   additionalPodMonitors:
     - name: k8s-monitoring-beyla
       namespace: monitoring
@@ -134,71 +242,9 @@ prometheus:
         - port: metrics  # 对应 Beyla Pod 的 metrics 端口
           interval: 15s
           path: /metrics
-  additionalScrapeConfigs:
-    # 抓取 Loki Pod 的监控指标
-    - job_name: 'loki-pods'
-      kubernetes_sd_configs:
-        - role: pod
-      # 筛选带有 Loki 标签的 Pod
-      relabel_configs:
-        # 保留标签为 app.kubernetes.io/name=loki 的 Pod
-        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
-          regex: loki
-          action: keep
-        # 保留标签为 app.kubernetes.io/component 且值匹配 Loki 组件的 Pod（如 distributor/ingester/querier 等）
-        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
-          regex: (distributor|ingester|querier|query-frontend|compactor|table-manager)
-          action: keep
-        # 从 Pod 注解中获取 metrics 路径（默认 /metrics）
-        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
-          regex: (.+)
-          target_label: __metrics_path__
-          action: replace
-        # 从 Pod 注解中获取 metrics 端口（默认 3100）
-        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
-          regex: ([^:]+)(?::\d+)?;(\d+)
-          replacement: $1:$2
-          target_label: __address__
-        # 添加命名空间标签
-        - source_labels: [__meta_kubernetes_namespace]
-          target_label: kubernetes_namespace
-        # 添加 Pod 名称标签
-        - source_labels: [__meta_kubernetes_pod_name]
-          target_label: kubernetes_pod_name
-        # 添加组件类型标签（如 distributor/ingester）
-        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
-          target_label: loki_component
-
-    # 抓取 Loki Service 的监控指标（适用于通过 Service 暴露的集群内组件）
-    - job_name: 'loki-services'
-      kubernetes_sd_configs:
-        - role: service
-      # 筛选带有 Loki 标签的 Service
-      relabel_configs:
-        # 保留标签为 app.kubernetes.io/name=loki 的 Service
-        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
-          regex: loki
-          action: keep
-        # 保留标签为 app.kubernetes.io/component 且值匹配 Loki 组件的 Service
-        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]
-          regex: (distributor|ingester|querier|query-frontend|compactor|table-manager)
-          action: keep
-        # 仅抓取暴露了 metrics 端口的 Service（默认端口名 http-metrics 或 3100）
-        - source_labels: [__meta_kubernetes_service_port_name]
-          regex: (http-metrics|metrics|3100)
-          action: keep
-        # 添加命名空间标签
-        - source_labels: [__meta_kubernetes_namespace]
-          target_label: kubernetes_namespace
-        # 添加 Service 名称标签
-        - source_labels: [__meta_kubernetes_service_name]
-          target_label: kubernetes_service_name
-        # 添加组件类型标签
-        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]
-          target_label: loki_component
 
 grafana:
-  defaultDashboardsTimezone: utc
+  defaultDashboardsTimezone: Asia/Shanghai
   persistence:
     enabled: true  # 开启Grafana持久化
     storageClassName: "longhorn"  # 使用longhorn存储类
