@@ -24,8 +24,8 @@ spec:
       enableServiceLinks: true
       containers:
         - name: homepage
-          # 使用FluxCD管理的镜像，引用名为"homepage"的ImageRepository
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          # 使用FluxCD管理的镜像
+          image: ghcr.io/gethomepage/homepage:latest
           imagePullPolicy: Always
           env:
             - name: HOMEPAGE_ALLOWED_HOSTS
