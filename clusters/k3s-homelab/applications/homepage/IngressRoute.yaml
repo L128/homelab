@@ -17,3 +17,5 @@ spec:
               httpOnly: true
               secure: true
               sameSite: none
+  tls:
+    secretName: homepage-tls
