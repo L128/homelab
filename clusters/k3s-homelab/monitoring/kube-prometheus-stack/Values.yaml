@@ -134,8 +134,71 @@ prometheus:
         - port: metrics  # 对应 Beyla Pod 的 metrics 端口
           interval: 15s
           path: /metrics
+  additionalScrapeConfigs:
+    # 抓取 Loki Pod 的监控指标
+    - job_name: 'loki-pods'
+      kubernetes_sd_configs:
+        - role: pod
+      # 筛选带有 Loki 标签的 Pod
+      relabel_configs:
+        # 保留标签为 app.kubernetes.io/name=loki 的 Pod
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_name]
+          regex: loki
+          action: keep
+        # 保留标签为 app.kubernetes.io/component 且值匹配 Loki 组件的 Pod（如 distributor/ingester/querier 等）
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
+          regex: (distributor|ingester|querier|query-frontend|compactor|table-manager)
+          action: keep
+        # 从 Pod 注解中获取 metrics 路径（默认 /metrics）
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          regex: (.+)
+          target_label: __metrics_path__
+          action: replace
+        # 从 Pod 注解中获取 metrics 端口（默认 3100）
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        # 添加命名空间标签
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: kubernetes_namespace
+        # 添加 Pod 名称标签
+        - source_labels: [__meta_kubernetes_pod_name]
+          target_label: kubernetes_pod_name
+        # 添加组件类型标签（如 distributor/ingester）
+        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
+          target_label: loki_component
+
+    # 抓取 Loki Service 的监控指标（适用于通过 Service 暴露的集群内组件）
+    - job_name: 'loki-services'
+      kubernetes_sd_configs:
+        - role: service
+      # 筛选带有 Loki 标签的 Service
+      relabel_configs:
+        # 保留标签为 app.kubernetes.io/name=loki 的 Service
+        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_name]
+          regex: loki
+          action: keep
+        # 保留标签为 app.kubernetes.io/component 且值匹配 Loki 组件的 Service
+        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]
+          regex: (distributor|ingester|querier|query-frontend|compactor|table-manager)
+          action: keep
+        # 仅抓取暴露了 metrics 端口的 Service（默认端口名 http-metrics 或 3100）
+        - source_labels: [__meta_kubernetes_service_port_name]
+          regex: (http-metrics|metrics|3100)
+          action: keep
+        # 添加命名空间标签
+        - source_labels: [__meta_kubernetes_namespace]
+          target_label: kubernetes_namespace
+        # 添加 Service 名称标签
+        - source_labels: [__meta_kubernetes_service_name]
+          target_label: kubernetes_service_name
+        # 添加组件类型标签
+        - source_labels: [__meta_kubernetes_service_label_app_kubernetes_io_component]
+          target_label: loki_component
 
 grafana:
+  defaultDashboardsTimezone: utc
   persistence:
     enabled: true  # 开启Grafana持久化
     storageClassName: "longhorn"  # 使用longhorn存储类
