@@ -112,7 +112,25 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 4. k8s-monitoring-alloy-singleton（Alloy 单例组件）
+    # 4. k8s-monitoring-alloy-metrics-cluster（Alloy 集群级指标组件）
+    ###########################################################################
+    - name: k8s-monitoring-alloy-metrics-cluster
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: alloy-metrics
+          app.kubernetes.io/instance: k8s-monitoring-alloy-metrics
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # 端口名称
+          interval: 15s
+          path: /metrics  # 暴露集群级指标
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 5. k8s-monitoring-alloy-singleton（Alloy 单例组件）
     ###########################################################################
     - name: k8s-monitoring-alloy-singleton
       namespace: monitoring
@@ -130,7 +148,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 5. k8s-monitoring-alloy-operator（Alloy 控制器）
+    # 6. k8s-monitoring-alloy-operator（Alloy 控制器）
     ###########################################################################
     - name: k8s-monitoring-alloy-operator
       namespace: monitoring
@@ -148,7 +166,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 6. k8s-monitoring-alloy-logs（Alloy 日志收集组件）
+    # 7. k8s-monitoring-alloy-logs（Alloy 日志收集组件）
     ###########################################################################
     - name: k8s-monitoring-alloy-logs
       namespace: monitoring
@@ -166,7 +184,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 7. k8s-monitoring-alloy-receiver（Alloy 数据接收组件）
+    # 8. k8s-monitoring-alloy-receiver（Alloy 数据接收组件）
     ###########################################################################
     - name: k8s-monitoring-alloy-receiver
       namespace: monitoring
@@ -186,7 +204,7 @@ prometheus:
     ###########################################################################
     # 第三部分: 可观测性后端服务
     ###########################################################################
-    # 8. loki（日志存储与查询组件）
+    # 9. loki（日志存储与查询组件）
     ###########################################################################
     - name: loki
       namespace: monitoring
@@ -204,7 +222,79 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 9. tempo（追踪数据存储与查询组件）
+    # 10. loki-canary（Loki 可用性检测）
+    ###########################################################################
+    - name: loki-canary
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/component: canary
+          app.kubernetes.io/instance: loki
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # 端口名称
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 11. loki-chunks-cache（Loki 块缓存）
+    ###########################################################################
+    - name: loki-chunks-cache
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/component: memcached-chunks-cache
+          app.kubernetes.io/instance: loki
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # 端口名称
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 12. loki-gateway（Loki 网关）
+    ###########################################################################
+    - name: loki-gateway
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/component: gateway
+          app.kubernetes.io/instance: loki
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # 端口名称
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 13. loki-results-cache（Loki 结果缓存）
+    ###########################################################################
+    - name: loki-results-cache
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app.kubernetes.io/component: memcached-results-cache
+          app.kubernetes.io/instance: loki
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http-metrics  # 端口名称
+          interval: 15s
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 14. tempo（追踪数据存储与查询组件）
     ###########################################################################
     - name: tempo
       namespace: monitoring
@@ -222,7 +312,7 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 10. minio（对象存储服务）
+    # 15. minio（对象存储服务）
     ###########################################################################
     - name: minio
       namespace: monitoring
@@ -240,7 +330,25 @@ prometheus:
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 11. uptime-kuma（服务健康监控组件）
+    # 16. minio-console（MinIO 控制台）
+    ###########################################################################
+    - name: minio-console
+      namespace: monitoring
+      selector:
+        matchLabels:
+          app: minio
+          release: minio
+      namespaceSelector:
+        matchNames:
+          - monitoring
+      endpoints:
+        - port: http  # 端口名称（不是端口号）
+          interval: 30s  # 控制台指标变化较慢
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s
+
+    ###########################################################################
+    # 17. uptime-kuma（服务健康监控组件）
     ###########################################################################
     - name: uptime-kuma
       namespace: monitoring
