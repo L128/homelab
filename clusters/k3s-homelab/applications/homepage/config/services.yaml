@@ -1,14 +1,69 @@
-- My First Group:
-    - My First Service:
-        href: http://localhost/
-        description: Homepage is awesome
+# 自动化和持续集成/部署
+- 自动化与CD/CI:
+    - Argo CD:
+        href: https://argocd.app.homelab.me
+        description: Kubernetes 原生的持续部署工具
+        icon: svg-icon:argo-cd
+        widget: 
+          type: argocd
+          url: https://argocd.app.homelab.me
+          username: admin
+          password: secret
 
-- My Second Group:
-    - My Second Service:
-        href: http://localhost/
-        description: Homepage is the best
+# 容器管理
+- 容器管理:
+    - Portainer:
+        href: https://portainer.app.homelab.me
+        description: 容器管理平台
+        icon: svg-icon:portainer
+    - Traefik Dashboard:
+        href: https://traefik.app.homelab.me
+        description: 云原生边缘路由器和反向代理
+        icon: svg-icon:traefik
 
-- My Third Group:
-    - My Third Service:
-        href: http://localhost/
-        description: Homepage is 😎
+# 监控和可观测性
+- 监控与可观测性:
+    - Prometheus:
+        href: https://prometheus.app.homelab.me
+        description: 开源监控和警报工具包
+        icon: svg-icon:prometheus
+        widget: 
+          type: prometheus
+          url: https://prometheus.app.homelab.me
+          username: admin
+          password: secret
+    - Grafana:
+        href: https://grafana.app.homelab.me
+        description: 交互式可视化平台
+        icon: svg-icon:grafana
+    - Alertmanager:
+        href: https://alertmanager.app.homelab.me
+        description: 警报管理系统
+        icon: svg-icon:alertmanager
+    - Uptime Kuma:
+        href: https://uptimekuma.app.homelab.me
+        description: 自托管的服务监控工具
+        icon: svg-icon:uptime-kuma
+        widget: 
+          type: uptimekuma
+          url: https://uptimekuma.app.homelab.me
+          username: admin
+          password: secret
+
+# 应用仪表盘
+- 应用仪表盘:
+    - Homepage:
+        href: https://homepage.app.homelab.me
+        description: 自托管的服务仪表盘
+        icon: svg-icon:homepage
+    - Homarr:
+        href: https://homarr.app.homelab.me
+        description: 自托管的应用程序和书签仪表板
+        icon: svg-icon:homarr
+
+# 示例应用
+- 示例应用:
+    - Reference:
+        href: https://reference.app.homelab.me
+        description: 参考应用示例
+        icon: svg-icon:reference
