@@ -7,8 +7,8 @@ spec:
   entryPoints:
     - websecure
   routes:
-  - kind: Rule
-    match: Host(`homepage.app.homelab.com`)
+  - match: Host(`homepage.app.homelab.com`) && PathPrefix(`/`)
+    kind: Rule
     services:
     - kind: Service
       name: homepage
