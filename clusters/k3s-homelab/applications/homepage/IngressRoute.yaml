@@ -7,16 +7,16 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - kind: Rule
-      match: Host(`homepage.app.homelab.com`)
-      services:
-        - kind: Service
-          name: homepage
-          port: 3000
-          sticky:
-            cookie:
-              httpOnly: true
-              secure: true
-              sameSite: none
+  - kind: Rule
+    match: Host(`homepage.app.homelab.com`)
+    services:
+    - kind: Service
+      name: homepage
+      port: 3000
+      sticky:
+        cookie:
+          httpOnly: true
+          secure: true
+          sameSite: none
   tls:
     secretName: homepage-tls
