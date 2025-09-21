@@ -10,8 +10,7 @@ spec:
   - match: Host(`homepage.app.homelab.com`) && PathPrefix(`/`)
     kind: Rule
     services:
-    - kind: Service
-      name: homepage
+    - name: homepage
       port: 3000
       sticky:
         cookie:
