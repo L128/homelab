@@ -8,4 +8,4 @@ spec:
     name: homepage
   policy:
     semver:
-      range: x.x.x
+      range: 1.x.x

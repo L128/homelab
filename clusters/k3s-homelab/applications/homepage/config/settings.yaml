@@ -1,0 +1,57 @@
+---
+# Homepage configuration
+# For configuration options, please see:
+# https://gethomepage.dev/en/configs/settings/
+
+---
+
+title: Homepage
+subtitle: Self-hosted Services
+logo: 
+favicon: 
+headerStyle: 
+
+theme: dark
+colors:
+  light:
+    primary: "#3b82f6"
+    background: "#f8fafc"
+  dark:
+    primary: "#3b82f6"
+    background: "#0f172a"
+
+# Enable the sidebar for navigation
+sidebar: false
+
+# Show the search bar
+search: true
+
+# Show the theme toggle
+themeToggle: true
+
+# Enable grouping by hostname
+showHostnames: false
+
+# Show CPU and memory usage bars
+showStats: false
+
+# Show the last updated time
+showLastUpdated: false
+
+# Show the app version
+showAppVersion: false
+
+# Show the clock
+showClock: false
+
+# Show the weather
+showWeather: false
+
+# Show the status indicator
+showStatus: true
+
+# Default status timeout
+statusTimeout: 5
+
+# Default status refresh interval
+statusRefreshInterval: 30
