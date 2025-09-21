@@ -1,0 +1,587 @@
+[2025-09-21T13:55:09.109Z] info: proxmox.yaml was copied to the config folder
+[2025-09-21T13:55:09.218Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T13:55:09.232Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T13:55:09.222Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T13:55:09.232Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T13:55:09.233Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T13:55:09.272Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:09.451Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://argocd.app.homelab.me/api/v1/applications
+[2025-09-21T13:55:12.277Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:15.305Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:18.357Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:21.406Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:24.446Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:27.473Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:30.522Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:33.594Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:36.634Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:39.673Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:42.711Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:45.783Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:48.878Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:51.903Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:54.961Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:55:57.997Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:01.053Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:04.104Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:07.138Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:10.192Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:13.245Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:16.357Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:19.412Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:22.484Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:25.558Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:28.580Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:31.659Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:34.712Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:37.807Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:40.867Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:43.904Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:46.926Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:49.987Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:53.050Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:56.111Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:56:59.188Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:02.248Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:05.295Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:08.350Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:11.449Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:14.517Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:17.579Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:20.633Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:23.673Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:26.724Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:29.789Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:32.849Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:35.909Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:38.967Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:42.009Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:45.041Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:48.076Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:51.105Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:54.143Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:57:57.217Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:00.334Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:03.426Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:06.623Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:09.669Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:12.729Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:15.771Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:18.746Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:21.776Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:24.813Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:27.833Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:30.910Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T13:58:33.076Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T13:58:33.079Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T13:58:33.078Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T13:58:33.079Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T13:58:33.079Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T13:58:33.150Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://argocd.app.homelab.me/api/v1/applications
+[2025-09-21T14:40:17.550Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:17.676Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:40:17.680Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:40:17.678Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:40:17.680Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:40:17.680Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:40:17.751Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://argocd.app.homelab.me/api/v1/applications
+[2025-09-21T14:40:19.950Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:40:19.954Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:40:19.965Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/pages/index.js:1:46056)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/pages/index.js:1:11836)
+    at async q (/app/.next/server/pages/index.js:1:57826)
+    at async K (/app/.next/server/pages/index.js:1:15404)
+    at async t9 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:12:4682)
+    at async u (/app/.next/server/pages/index.js:4:58202)
+    at async /app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:1:64237
+[2025-09-21T14:40:19.965Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:40:19.965Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:40:20.446Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:20.667Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://argocd.app.homelab.me/api/v1/applications
+[2025-09-21T14:40:20.798Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:40:20.800Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:40:20.799Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:40:20.799Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:40:20.800Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:40:23.478Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:26.521Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:29.539Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:32.604Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:35.626Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:38.669Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:41.687Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:44.750Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:47.784Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:50.822Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:53.849Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:56.870Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:40:59.943Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:02.991Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:06.034Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:09.057Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:12.086Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:15.209Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:18.337Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:21.419Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:24.498Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:27.555Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:30.600Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:33.624Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:36.696Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:39.754Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:42.811Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:45.860Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:48.936Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:51.984Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:55.072Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:41:58.124Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:01.161Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:04.178Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:07.224Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:10.260Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:13.336Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:16.390Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:19.423Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:22.465Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:42:23.411Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://argocd.app.homelab.me/api/v1/applications
+[2025-09-21T14:42:23.429Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:42:23.433Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:42:23.432Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:42:23.433Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:42:23.433Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:56:58.231Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:56:58.275Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:56:58.279Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:56:58.287Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async v (/app/.next/server/chunks/1691.js:1:11570)
+    at async w (/app/.next/server/chunks/1691.js:1:11685)
+    at async l (/app/.next/server/pages/api/services/proxy.js:1:39968)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services/proxy.js:1:15290)
+[2025-09-21T14:56:58.287Z] error: <servicesProxy> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async v (/app/.next/server/chunks/1691.js:1:11570)
+    at async w (/app/.next/server/chunks/1691.js:1:11685)
+    at async l (/app/.next/server/pages/api/services/proxy.js:1:39968)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services/proxy.js:1:15290)
+[2025-09-21T14:56:58.300Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:56:58.301Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:56:58.301Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:56:58.301Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:56:58.301Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:56:58.384Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:56:58.385Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:56:58.387Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/pages/index.js:1:46056)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/pages/index.js:1:11836)
+    at async q (/app/.next/server/pages/index.js:1:57826)
+    at async K (/app/.next/server/pages/index.js:1:15404)
+    at async t9 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:12:4682)
+    at async u (/app/.next/server/pages/index.js:4:58202)
+    at async /app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:1:64237
+[2025-09-21T14:56:58.387Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:56:58.387Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:56:58.715Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:56:58.767Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:56:58.778Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:56:58.777Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:56:58.778Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:56:58.778Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:57:01.737Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:04.793Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:07.861Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:10.916Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:13.946Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:16.999Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:20.126Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:23.200Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:26.231Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:29.293Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:32.327Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:35.388Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:38.420Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:41.486Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:44.570Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:46.785Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:46.964Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:57:46.966Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:57:46.966Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:57:46.966Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:57:46.966Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:57:47.008Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:57:47.011Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:57:47.011Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/pages/index.js:1:46056)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/pages/index.js:1:11836)
+    at async q (/app/.next/server/pages/index.js:1:57826)
+    at async K (/app/.next/server/pages/index.js:1:15404)
+    at async t9 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:12:4682)
+    at async u (/app/.next/server/pages/index.js:4:58202)
+    at async /app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages.runtime.prod.js:1:64237
+[2025-09-21T14:57:47.011Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:57:47.011Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:57:47.164Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:47.275Z] error: <service-helpers> Error getting services from Docker server 'defaults': [Error: connect ENOENT /var/run/docker.sock] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2025-09-21T14:57:47.279Z] error: Failed to discover services, please check kubernetes.yaml for errors or remove example entries.
+[2025-09-21T14:57:47.279Z] error: <ingress-list> Error getting ingresses: NaN undefined undefined
+[2025-09-21T14:57:47.279Z] error: <service-helpers> TypeError: Cannot read properties of null (reading 'items')
+    at Object.i [as listIngress] (/app/.next/server/chunks/1691.js:1:3698)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async t (/app/.next/server/chunks/1691.js:1:10792)
+    at async q (/app/.next/server/pages/api/bookmarks.js:1:3809)
+    at async g (/app/.next/server/pages/api/services.js:1:185)
+    at async e7 (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:99626)
+    at async te.render (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/pages-api.runtime.prod.js:1:100341)
+    at async Module.m (/app/.next/server/pages/api/services.js:1:6371)
+    at async NextNodeServer.runApi (/app/node_modules/.pnpm/next@15.4.5_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/server/next-server.js:767:9)
+[2025-09-21T14:57:47.279Z] error: TypeError: Cannot read properties of null (reading 'items')
+[2025-09-21T14:57:50.185Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:53.208Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:56.246Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:57:59.279Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:02.305Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:05.334Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:08.415Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:11.438Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:14.533Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:17.562Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:20.637Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:23.721Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:26.747Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:29.819Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:32.845Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:35.919Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:38.999Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:42.021Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:45.049Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:48.094Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:51.136Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:54.157Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:58:57.271Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:00.304Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:03.344Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:06.379Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:09.399Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:12.430Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:15.461Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:18.486Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:21.572Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:24.603Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:27.653Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:30.482Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:33.510Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:36.551Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:39.654Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:42.711Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:45.768Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:48.826Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:51.869Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:54.911Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T14:59:57.975Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:00.890Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:03.949Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:07.021Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:10.082Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:13.125Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:16.142Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:19.164Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:22.219Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:25.239Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:28.266Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:31.665Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:34.688Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:37.718Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:40.764Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:43.822Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:46.838Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:49.888Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:52.962Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:55.986Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:00:59.046Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:02.110Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:05.098Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:08.155Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:11.207Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:14.238Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:17.319Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:20.340Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:23.387Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:26.435Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:29.480Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:32.498Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:35.603Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:38.659Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:41.683Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:44.744Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:47.812Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:50.831Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:53.889Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:01:56.950Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:00.047Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:03.130Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:06.174Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:09.244Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:12.306Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:15.379Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:18.399Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:21.481Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:24.589Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:27.649Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:30.838Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:33.919Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:36.953Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:39.997Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:43.070Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:46.120Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:49.180Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:52.204Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:55.306Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:02:58.361Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:01.453Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:04.510Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:07.544Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:10.585Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:13.624Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:16.675Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:19.693Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:22.778Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:25.799Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:28.866Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:31.911Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:34.988Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:38.020Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:41.038Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:44.069Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:47.121Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:50.139Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:53.204Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:56.241Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:03:59.263Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:02.334Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:05.362Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:08.433Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:11.491Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:14.556Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:17.620Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:20.633Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:23.647Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:26.665Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:29.692Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:32.740Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:35.815Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:38.859Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:41.903Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:44.917Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:47.933Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:50.984Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:54.046Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:04:57.072Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:00.133Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:03.154Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:06.175Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:09.213Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:12.243Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:15.294Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:18.316Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:21.333Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:24.375Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:27.471Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:30.550Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:33.572Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:36.609Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:39.650Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:42.674Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:45.796Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:48.823Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:51.900Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:54.982Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:05:58.012Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:01.148Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:04.210Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:07.288Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:10.352Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:13.407Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:16.460Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:19.506Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:22.541Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:25.607Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:28.645Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:31.670Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:34.727Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:37.943Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:41.006Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:44.108Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:47.154Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:50.198Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:53.230Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:56.300Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:06:59.362Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:02.420Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:05.445Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:08.483Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:11.543Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:14.619Z] error: <widget> Error getting nodes: NaN undefined undefined
+[2025-09-21T15:07:17.674Z] error: <widget> Error getting nodes: NaN undefined undefined

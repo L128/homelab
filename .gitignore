@@ -1,7 +1,5 @@
 .DS_Store
 repomix-output.xml
-dev/
-VolumeRestore/
-values/
-argocd/
+archived-values/
 secret/
+clusters/deprecated/

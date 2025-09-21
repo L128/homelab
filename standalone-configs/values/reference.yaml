@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reference-deployment
+  namespace: myapps
+  labels:
+    app: reference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reference
+  template:
+    metadata:
+      labels:
+        app: reference
+    spec:
+      containers:
+      - name: reference-container
+        image: wcjiang/reference:latest
+        ports:
+        - containerPort: 3000  # 容器暴露端口（需与镜像实际端口一致，该镜像默认使用80）
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reference-service
+  namespace: myapps
+  labels:
+    app: reference
+spec:
+  selector:
+    app: reference  # 关联Deployment的标签
+  ports:
+  - port: 80        # Service暴露端口
+    targetPort: 3000  # 映射到容器的端口
+  type: ClusterIP   # 无负载均衡，直接访问Pod
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: reference-ingressroute
+  namespace: myapps
+  labels:
+    app: reference
+spec:
+  entryPoints:
+    - websecure  # Traefik入口点（默认HTTP入口，若需HTTPS可改为websecure并配置TLS）
+  routes:
+  - match: Host(`reference.app.homelab.me`) && PathPrefix(`/`)  # 替换为你的域名
+    kind: Rule
+    services:
+    - name: reference-service  # 关联Service名称
+      port: 80                # 关联Service端口
+  tls:
+    secretName: myapps-tls  # 引用证书 Secret（需与 cert-manager 创建的 Secret 名称一致)

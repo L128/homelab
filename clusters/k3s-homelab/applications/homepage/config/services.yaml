@@ -1,69 +1,73 @@
-# 自动化和持续集成/部署
-- 自动化与CD/CI:
-    - Argo CD:
-        href: https://argocd.app.homelab.me
-        description: Kubernetes 原生的持续部署工具
-        icon: svg-icon:argo-cd
-        widget: 
-          type: argocd
-          url: https://argocd.app.homelab.me
-          username: admin
-          password: secret
-
 # 容器管理
 - 容器管理:
     - Portainer:
         href: https://portainer.app.homelab.me
         description: 容器管理平台
-        icon: svg-icon:portainer
+        icon: portainer.png
     - Traefik Dashboard:
         href: https://traefik.app.homelab.me
         description: 云原生边缘路由器和反向代理
-        icon: svg-icon:traefik
+        icon: traefik.png
 
 # 监控和可观测性
 - 监控与可观测性:
     - Prometheus:
         href: https://prometheus.app.homelab.me
         description: 开源监控和警报工具包
-        icon: svg-icon:prometheus
+        icon: prometheus.png
         widget: 
           type: prometheus
           url: https://prometheus.app.homelab.me
-          username: admin
-          password: secret
+          username: "{{ secret.grafana-credentials.username }}"
+          password: "{{ secret.grafana-credentials.password }}"
+          label: Prometheus监控
+          refresh: 30s
     - Grafana:
         href: https://grafana.app.homelab.me
         description: 交互式可视化平台
-        icon: svg-icon:grafana
+        icon: grafana.png
+        widget:
+          type: grafana
+          version: 2 # 根据Grafana版本选择1或2
+          alerts: grafana # 可选，默认是grafana
+          url: https://grafana.app.homelab.me
+          username: "{{ secret.grafana-credentials.username }}"
+          password: "{{ secret.grafana-credentials.password }}"
     - Alertmanager:
         href: https://alertmanager.app.homelab.me
         description: 警报管理系统
-        icon: svg-icon:alertmanager
+        icon: alertmanager.png
+        widget:
+          type: alertmanager
+          url: https://alertmanager.app.homelab.me
+          username: "{{ secret.grafana-credentials.username }}"
+          password: "{{ secret.grafana-credentials.password }}"
     - Uptime Kuma:
         href: https://uptimekuma.app.homelab.me
         description: 自托管的服务监控工具
-        icon: svg-icon:uptime-kuma
-        widget: 
+        icon: uptimekuma.png
+        widget:
           type: uptimekuma
           url: https://uptimekuma.app.homelab.me
-          username: admin
-          password: secret
+          username: "{{ secret.grafana-credentials.username }}"
+          password: "{{ secret.grafana-credentials.password }}"
+          label: 服务可用性
+          refresh: 60s
 
 # 应用仪表盘
 - 应用仪表盘:
     - Homepage:
         href: https://homepage.app.homelab.me
         description: 自托管的服务仪表盘
-        icon: svg-icon:homepage
+        icon: homepage.png
     - Homarr:
         href: https://homarr.app.homelab.me
         description: 自托管的应用程序和书签仪表板
-        icon: svg-icon:homarr
+        icon: homarr.png
 
 # 示例应用
 - 示例应用:
     - Reference:
         href: https://reference.app.homelab.me
         description: 参考应用示例
-        icon: svg-icon:reference
+        icon: reference.png

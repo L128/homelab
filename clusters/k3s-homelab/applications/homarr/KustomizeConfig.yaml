@@ -1,6 +1,0 @@
-nameReference:
-  - kind: ConfigMap
-    version: v1
-    fieldSpecs:
-      - path: spec/valuesFrom/name  # HelmRelease 中引用 ConfigMap 的路径
-        kind: HelmRelease          # 目标资源类型
