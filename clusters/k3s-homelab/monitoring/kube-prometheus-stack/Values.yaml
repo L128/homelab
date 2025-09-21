@@ -1,10 +1,23 @@
+# Kube Prometheus Stack 配置文件
+# 版本: 77.10.0
+# 最后更新: 
+
+######################################
+# 基础配置
+######################################
+# CRD 管理配置
 crd:
   install: true  # 允许 Helm 安装/升级 CRD
   upgrade: true
-  
+
+######################################
+# 存储配置
+######################################
 # 统一配置所有组件的PVC，使用longhorn存储类
+# Alertmanager 存储配置
 alertmanager:
   alertmanagerSpec:
+    # 持久化存储配置
     volumeClaimTemplate:
       spec:
         storageClassName: "longhorn"  # 使用longhorn存储类
@@ -17,8 +30,10 @@ alertmanager:
       whenDeleted: Retain
       whenScaled: Retain
 
+# Prometheus 存储配置
 prometheus:
   prometheusSpec:
+    # 持久化存储配置
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -26,31 +41,37 @@ prometheus:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 100Gi  # Prometheusetheus存储容量（建议更大）
+              storage: 100Gi  # Prometheus存储容量（建议更大）
     # PVC保留策略（可选，K8s 1.27+支持）
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
       whenScaled: Retain
+
+######################################
+# 服务监控配置 (ServiceMonitor)
+######################################
   additionalServiceMonitors:
     ###########################################################################
-    # 1. k8s-monitoring-node-exporter（节点级指标，已提供模板，此处保留并补全）
+    # 第一部分: 核心集群监控组件
+    ###########################################################################
+    # 1. k8s-monitoring-node-exporter（节点级指标采集）
     ###########################################################################
     - name: k8s-monitoring-node-exporter
-      namespace: monitoring  # 与 Prometheus 同命名空间（通常为 monitoring）
+      namespace: monitoring  # 与 Prometheus 同命名空间
       selector:
-        # 匹配 node-exporter Service 的标签（需与集群实际标签一致，可通过 kubectl get svc -n monitoring 查看）
+        # 匹配 node-exporter Service 的标签
         matchLabels:
           app.kubernetes.io/name: node-exporter
           app.kubernetes.io/instance: k8s-monitoring  # 对应 k8s-monitoring Chart 的实例名
       namespaceSelector:
-        # 目标 Service 所在命名空间（k8s-monitoring 组件默认部署在 monitoring）
+        # 目标 Service 所在命名空间
         matchNames:
           - monitoring
       endpoints:
-        - port: metrics  # 对应 node-exporter Service 的端口名（默认是 metrics）
-          interval: 15s  # 指标抓取间隔（根据需求调整，15s 为常规选择）
-          path: /metrics  # node-exporter 默认指标路径
-          scrapeTimeout: 10s  # 抓取超时（避免阻塞，建议小于 interval）
+        - port: metrics  # 端口名称（非端口号）
+          interval: 15s  # 指标抓取间隔
+          path: /metrics  # 默认指标路径
+          scrapeTimeout: 10s  # 抓取超时（小于间隔）
 
     ###########################################################################
     # 2. k8s-monitoring-kube-state-metrics（K8s 资源对象指标）
@@ -65,13 +86,15 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: http  # kube-state-metrics 默认端口名（非 https 场景）
+        - port: http  # 端口名称
           interval: 15s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 3. k8s-monitoring-alloy-metrics（Alloy 指标处理模块，StatefulSet）
+    # 第二部分: Alloy 组件监控
+    ###########################################################################
+    # 3. k8s-monitoring-alloy-metrics（Alloy 指标处理模块）
     ###########################################################################
     - name: k8s-monitoring-alloy-metrics
       namespace: monitoring
@@ -83,13 +106,13 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: http-metrics  # Alloy metrics 组件默认端口名
+        - port: http-metrics  # 端口名称
           interval: 15s
           path: /metrics  # 暴露 Alloy 自身运行状态及转发的指标
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 4. k8s-monitoring-alloy-singleton（Alloy 单例组件，处理全局任务）
+    # 4. k8s-monitoring-alloy-singleton（Alloy 单例组件）
     ###########################################################################
     - name: k8s-monitoring-alloy-singleton
       namespace: monitoring
@@ -101,13 +124,13 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: http-metrics  # Alloy singleton 组件默认端口名
+        - port: http-metrics  # 端口名称
           interval: 15s
-          path: /metrics  # 暴露全局任务（如聚合指标）的运行状态
+          path: /metrics  # 暴露全局任务运行状态
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 5. k8s-monitoring-alloy-operator（Alloy 控制器，管理 Alloy 实例）
+    # 5. k8s-monitoring-alloy-operator（Alloy 控制器）
     ###########################################################################
     - name: k8s-monitoring-alloy-operator
       namespace: monitoring
@@ -119,9 +142,9 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: metrics  # Operator 默认端口名（暴露控制器运行指标）
+        - port: metrics  # 端口名称
           interval: 30s  # Operator 指标变化较慢，可适当延长间隔
-          path: /metrics  # 默认指标路径（如 reconcile 次数、实例状态）
+          path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
 
     ###########################################################################
@@ -137,7 +160,7 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 12345  # Alloy logs 组件默认指标端口
+        - port: http-metrics  # 端口名称（不是端口号）
           interval: 15s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
@@ -155,11 +178,13 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 12345  # Alloy receiver 组件默认指标端口
+        - port: http-metrics  # 端口名称（不是端口号）
           interval: 15s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
 
+    ###########################################################################
+    # 第三部分: 可观测性后端服务
     ###########################################################################
     # 8. loki（日志存储与查询组件）
     ###########################################################################
@@ -173,7 +198,7 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 3100  # Loki 默认指标端口
+        - port: http-metrics  # 端口名称（不是端口号）
           interval: 15s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
@@ -191,13 +216,13 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 3200  # Tempo 默认指标端口
+        - port: tempo-prom-metrics  # 端口名称（不是端口号）
           interval: 15s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
 
     ###########################################################################
-    # 10. minio（对象存储服务，用于存储监控数据）
+    # 10. minio（对象存储服务）
     ###########################################################################
     - name: minio
       namespace: monitoring
@@ -209,8 +234,8 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 9000  # MinIO API 端口，同时暴露 Prometheus 指标
-          interval: 30s  # 存储服务指标变化较慢，可适当延长间隔
+        - port: http  # 端口名称（不是端口号）
+          interval: 30s  # 存储服务指标变化较慢
           path: /minio/v2/metrics/cluster  # MinIO 集群指标路径
           scrapeTimeout: 10s
 
@@ -227,11 +252,16 @@ prometheus:
         matchNames:
           - monitoring
       endpoints:
-        - port: 3001  # Uptime Kuma Web 界面端口，同时暴露 Prometheus 指标
+        - port: http  # 端口名称（不是端口号）
           interval: 30s
           path: /metrics  # 默认指标路径
           scrapeTimeout: 10s
+
+######################################
+# Pod 监控配置 (PodMonitor)
+######################################
   additionalPodMonitors:
+    # 1. k8s-monitoring-beyla（eBPF 自动检测组件）
     - name: k8s-monitoring-beyla
       namespace: monitoring
       selector:
