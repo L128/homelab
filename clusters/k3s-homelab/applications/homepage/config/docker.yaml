@@ -1,0 +1,10 @@
+# Docker configuration for Homepage
+defaults:
+  # Default docker endpoint
+  endpoint: unix:///var/run/docker.sock
+
+# Example docker configuration
+# dockers:
+#   - name: local
+#     endpoint: unix:///var/run/docker.sock
+#     ssl: false

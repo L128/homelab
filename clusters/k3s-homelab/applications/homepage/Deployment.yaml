@@ -62,7 +62,7 @@ spec:
             - mountPath: /app/config/logs
               name: logs
       volumes:
-        # 引用名为"homepage"的ConfigMap
+        # 引用Kustomize生成的ConfigMap
         - name: homepage-config
           configMap:
             name: homepage

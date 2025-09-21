@@ -1,9 +1,6 @@
----
 # Homepage configuration
 # For configuration options, please see:
 # https://gethomepage.dev/en/configs/settings/
-
----
 
 title: Homepage
 subtitle: Self-hosted Services

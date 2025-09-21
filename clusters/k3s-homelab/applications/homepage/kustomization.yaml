@@ -24,6 +24,7 @@ configMapGenerator:
   - config/bookmarks.yaml
   - config/services.yaml
   - config/widgets.yaml
+  - config/docker.yaml
 
 commonLabels:
   app.kubernetes.io/name: homepage
